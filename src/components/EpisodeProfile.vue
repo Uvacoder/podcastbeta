@@ -12,7 +12,20 @@
       </div>
     </div>
     <div class="profile-container">
+      
       <div class="profile-content-player">
+        <div class="audiovisualizer">
+                <div class="changeheight0" :style="{height: data1[0]+'px'}"></div>
+                <div class="changeheight1" :style="{height: data1[1]+'px'}"></div>
+                <div class="changeheight2" :style="{height: data1[2]+'px'}"></div>
+                <div class="changeheight3" :style="{height: data1[3]+'px'}"></div>
+                <div class="changeheight4" :style="{height: data1[4]+'px'}"></div>
+                <div class="changeheight5" :style="{height: data1[5]+'px'}"></div>
+                <div class="changeheight6" :style="{height: data1[6]+'px'}"></div>
+                <div class="changeheight7" :style="{height: data1[7]+'px'}"></div>
+                <div class="changeheight8" :style="{height: data1[8]+'px'}"></div>
+
+        </div>
         <!-- <audio
           :src="episodeToPlay"
           autoplay
@@ -55,7 +68,8 @@ export default {
       playStatus: false,
       currentProgress: 0,
       totalDuration: 0,
-      speed: null
+      speed: null,
+      data1: [100, 100, 50, 100, 50, 150, 150, 50, 90]
     };
   },
   watch: {
@@ -81,6 +95,12 @@ export default {
       this.episodeObject = result;
       this.episodeToPlay = `${result.stream_url +
         "?client_id=" + CLIENT_ID}`;
+
+
+
+
+
+
     },
     play() {
       document.getElementById('player').play();
@@ -122,6 +142,16 @@ export default {
 </script>
 
 <style scoped>
+
+.audiovisualizer {
+  height: 330px;
+  width: 400px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile-content {
   display: flex;
   background-color: #5000FF;
@@ -204,5 +234,86 @@ button::after {
 
 button:hover::after {
   height: 100%;
+}
+
+.changeheight0 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight1 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight2 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight3 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight4 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight5 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight6 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight7 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
+}
+
+.changeheight8 {
+  display: flex;
+  background-color: #5000FF;
+  /* border: 1px solid white; */
+  color: white;
+  width: 20px;
+  justify-items: center;
 }
 </style>
