@@ -2,7 +2,7 @@
   <div class="profile-content" ref="myref2">
     <div class="profile-container">
       <div class="profile-content-info">
-        <img :src="episodeObject.artwork_url" />
+        <img v-if="episodeObject" :src="thumbnailImage" />
         <h1>{{ episodeObject.title }}</h1>
         <p>{{ episodeObject.description }}</p>
         
@@ -83,7 +83,11 @@ export default {
     this.getSoundCloud();
   },
   computed: {
-
+    thumbnailImage() { 
+      let str = this.episodeObject.artwork_url;
+       let result = str.replace("large", "t500x500");
+       return result;
+    }
   },
   methods: {
     async getSoundCloud() {
@@ -222,7 +226,7 @@ export default {
 }
 
 img {
-  height: 300px;
+  height: 450px;
 }
 
 .profile-container {
