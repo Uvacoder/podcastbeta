@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-content">
+  <div class="profile-content" ref="myref2">
     <div class="profile-container">
       <div class="profile-content-info">
         <img :src="episodeObject.artwork_url" />
@@ -8,7 +8,7 @@
         
       </div>
       <div>
-        <progress id="seekbar" value="0" max="1"></progress>
+        <progress @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
       </div>
     </div>
     <div class="profile-container">
@@ -38,6 +38,7 @@
             :ontimeupdate.prop="udpateProgress" 
             id="player"
             :src="episodeToPlay"
+            autoplay
             crossorigin="anonymous"
             >
           </audio>
@@ -69,7 +70,8 @@ export default {
       currentProgress: 0,
       totalDuration: 0,
       speed: null,
-      data1: [100, 100, 50, 100, 50, 150, 150, 50, 90]
+      data1: [100, 100, 50, 100, 50, 150, 150, 50, 90],
+      boxposition: null
     };
   },
   watch: {
@@ -96,7 +98,51 @@ export default {
       this.episodeToPlay = `${result.stream_url +
         "?client_id=" + CLIENT_ID}`;
 
+    var audioElement = document.getElementById('player');
+    audioElement.src = `${result.stream_url +
+        "?client_id=" + CLIENT_ID}`
+    // audioElement.src = require('../assets/SampleAudio.mp3');
+    audioElement.crossOrigin = "anonymous";
 
+    var ctx = new AudioContext();
+    var sourceNode = ctx.createMediaElementSource(audioElement);
+
+    var analyser = ctx.createAnalyser();
+    analyser.smoothingTimeConstant = 0.85
+    analyser.fftSize = 1024;
+    sourceNode.connect(analyser);
+    analyser.connect(ctx.destination);
+
+    audioElement.play()
+
+    var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+    // analyser.frequencyBinCount
+
+    analyser.getByteFrequencyData(frequencyData);
+
+    this.data1 = frequencyData;
+
+    // console.log(frequencyData);
+
+      setInterval(function() {
+        analyser.getByteFrequencyData(frequencyData);
+        // console.log(frequencyData);
+    //     function groupAverage(arr, n) {
+    //   var result = [];
+    //   for (var i = 0; i < arr.length;) {
+    //    var sum = 0;
+    //    for(var j = 0; j< n; j++){
+    //   // Check if value is numeric. If not use default value as 0
+    //     sum += +arr[i++] || 0
+    //    }
+    //    result.push(sum/n);
+    //  }
+    //    return result
+      // }
+        // console.log(result);
+        this.data1 = frequencyData;
+        console.log(this.data1)
+      }, 1000);
 
 
 
@@ -109,21 +155,37 @@ export default {
       document.getElementById('player').pause();
     },
     skip() {
-      document.getElementById('player')
+     let player = document.getElementById('player')
       player.currentTime += 30.0;
     },
     rewind() {
-      document.getElementById('player')
+       let player = document.getElementById('player')
       player.currentTime -= 30.0;
     },
     playbackSpeed() {
-      document.getElementById('player')
+       let player = document.getElementById('player')
       player.playbackRate = 1.5;
     },
     normalSpeed() {
-      document.getElementById('player')
+       let player = document.getElementById('player')
       player.playbackRate = 1;
     },
+
+    progressClick(e) {
+      let el = document.getElementById('seekbar');
+      var x = e.pageX - this.$parent.$refs['myref'].getBoundingClientRect().width
+      var startPos = document.getElementById('seekbar').position;
+      console.log(this.$refs['myref2'].getBoundingClientRect().width);
+      var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
+      var finalx = (xconvert).toFixed(1);
+      document.getElementById('seekbar').value = finalx
+     
+      var player = document.getElementById('player');
+      var finalseconds = xconvert*player.duration;
+      player.currentTime = finalseconds;
+
+    },
+
     udpateProgress() {
       const player = document.getElementById('player');
       const progressbar = document.getElementById('seekbar');
@@ -168,21 +230,30 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  /* padding-top: 250px; */
 }
 
 .profile-content-info {
   width: 80%;
+  height: 80%;
 }
+
+.profile-content-player {
+  height: 80%;
+}
+
 
 .audio-player {
   width: inherit;
-  height: inherit;
+  /* height: inherit; */
 }
 
 progress {
   -webkit-appearance: none;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -213,6 +284,12 @@ button {
   font-weight: bold;
   position: relative;
   z-index: 1;
+}
+p {
+white-space: pre-wrap;
+font-size: 1rem;
+line-height: 1.5rem;
+color: rgba(255,255,255,0.75);
 }
 
 /* button:hover {
