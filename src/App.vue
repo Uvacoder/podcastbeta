@@ -1,7 +1,7 @@
 <template>
   <div class="app-content">
-    <div>
-      <h2 class="heading">Australian Design Radio</h2>
+    <div ref="myref">
+      <img class="logo" src="./assets/logo1.png" />
       <EpisodeList :episodes="episodes" />
     </div>
     <div>
@@ -60,10 +60,9 @@ body {
   letter-spacing: 0.5px;
 }
 
-.heading {
-  color: #4F00FF;
-  text-transform: uppercase;
-  font-weight: bold;
-  text-align: center;
+.logo {
+  padding-top: 40px;
+  padding-left: 5px;
+  width: 220px;
 }
 </style>
