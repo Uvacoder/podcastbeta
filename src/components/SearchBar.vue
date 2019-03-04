@@ -36,5 +36,7 @@ input:focus {
 
 div{
   margin: 5px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 </style>

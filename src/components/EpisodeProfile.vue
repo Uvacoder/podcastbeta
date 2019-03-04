@@ -16,15 +16,6 @@
       <div class="profile-content-player">
         <div class="audiovisualizer">
                 <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
-                <!-- <div class="changeheight0" :style="{height: data1[0]+'px'}"></div>
-                <div class="changeheight1" :style="{height: data1[1]+'px'}"></div>
-                <div class="changeheight2" :style="{height: data1[2]+'px'}"></div>
-                <div class="changeheight3" :style="{height: data1[3]+'px'}"></div>
-                <div class="changeheight4" :style="{height: data1[4]+'px'}"></div>
-                <div class="changeheight5" :style="{height: data1[5]+'px'}"></div>
-                <div class="changeheight6" :style="{height: data1[6]+'px'}"></div>
-                <div class="changeheight7" :style="{height: data1[7]+'px'}"></div>
-                <div class="changeheight8" :style="{height: data1[8]+'px'}"></div> -->
 
         </div>
         <p>{{ currentProgress }} / {{ totalDuration }}</p>
@@ -171,7 +162,7 @@ export default {
     updateProgress() {
       
       // code for webaudio api, rather than in setinterval loop
-      var frequencyData = new Uint8Array(256);
+      var frequencyData = new Uint8Array(64);
       this.analyser1.getByteFrequencyData(frequencyData);
       this.data1 = frequencyData;
       
@@ -308,16 +299,7 @@ button:hover::after {
   background-color: #5000FF;
   /* border: 1px solid white; */
   color: white;
-  width: 2px;
-  justify-items: center;
-}
-
-.changeheight0 {
-  display: flex;
-  background-color: #5000FF;
-  /* border: 1px solid white; */
-  color: white;
-  width: 20px;
+  width: 6px;
   justify-items: center;
 }
 </style>
