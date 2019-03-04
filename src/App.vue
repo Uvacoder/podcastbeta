@@ -2,7 +2,8 @@
   <div class="app-content">
     <div ref="myref">
       <img class="logo" src="./assets/logo1.png" />
-      <EpisodeList :episodes="episodes" />
+      <SearchBar @inputChange="onInputChange"/>
+      <EpisodeList v-if="filteredepisodes" :episodes="filteredepisodes" />
     </div>
     <div>
       <router-view />
@@ -14,21 +15,31 @@
 import axios from "axios";
 import EpisodeList from "./components/EpisodeList";
 import EpisodeProfile from "./components/EpisodeProfile";
+import SearchBar from "./components/SearchBar";
 
 export default {
   name: "App",
   components: {
     EpisodeList,
-    EpisodeProfile
+    EpisodeProfile,
+    SearchBar
   },
   data() {
     return {
       episodes: [],
-      currentPodcastUrl: null
+      currentPodcastUrl: null,
+      inputChange: ""
     };
   },
   mounted() {
     this.getSoundCloud();
+  },
+  computed: {
+    filteredepisodes: function() {
+      return this.episodes.filter((episode) => {
+        return episode.title.toLowerCase().match(this.inputChange.toLowerCase());
+      });
+    }
   },
   methods: {
     getSoundCloud() {
@@ -42,6 +53,10 @@ export default {
           console.log(response);
           this.episodes = response.data.collection;
         });
+    },
+    onInputChange(inputChange) {      
+      this.inputChange = inputChange;
+      console.log(this.inputChange);
     }
   }
 };
