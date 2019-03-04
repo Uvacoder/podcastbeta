@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     async getSoundCloud() {
-      this.data1 = null;
+      // this.data1 = null;
       const CLIENT_ID = process.env.VUE_APP_CLIENT_ID;
       const response = await axios.get(
         `https://api.soundcloud.com/users/235518337/tracks?client_id=${CLIENT_ID}&limit=10&linked_partitioning=0&offset=0`
@@ -93,6 +93,7 @@ export default {
 
     // webaudio API;
     var audioElement = this.$refs.playerref
+      audioElement.play()
 
     var ctx = new AudioContext();
     var sourceNode = ctx.createMediaElementSource(audioElement);
@@ -104,7 +105,7 @@ export default {
     analyser.connect(ctx.destination);
     this.analyser1 = analyser
 
-    // audioElement.play()
+  
 
     // var frequencyData = new Uint8Array(128);
     // // analyser.frequencyBinCount
@@ -123,6 +124,7 @@ export default {
     },
     play() {
       this.$refs.playerref.play();
+      this.getSoundCloud();
     },
     pause() {
       this.$refs.playerref.pause();
@@ -145,10 +147,10 @@ export default {
     },
 
     progressClick(e) {
-      let el = this.$refs.progressref;
+      // let el = this.$refs.progressref;
       var x = e.pageX - this.$parent.$refs['myref'].getBoundingClientRect().width
-      var startPos = this.$refs.progressref.position;
-      console.log(this.$refs['myref2'].getBoundingClientRect().width);
+      // var startPos = this.$refs.progressref.position;
+      // console.log(this.$refs['myref2'].getBoundingClientRect().width);
       var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
       var finalx = (xconvert).toFixed(1);
       this.$refs.progressref.value = finalx
