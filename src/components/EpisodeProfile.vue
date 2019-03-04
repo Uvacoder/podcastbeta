@@ -65,6 +65,10 @@ export default {
   watch: {
     $route(to, from) {
       this.getSoundCloud();
+        this.data1 = null;
+      this.currentProgress = 0;
+      this.totalDuration = 0;
+      
     }
   },
   created() {
@@ -93,13 +97,13 @@ export default {
 
     // webaudio API;
     var audioElement = this.$refs.playerref
-      audioElement.play()
+      // audioElement.play()
 
     var ctx = new AudioContext();
     var sourceNode = ctx.createMediaElementSource(audioElement);
 
     var analyser = ctx.createAnalyser();
-    analyser.smoothingTimeConstant = 0.85
+    analyser.smoothingTimeConstant = 0.5
     analyser.fftSize = 1024;
     sourceNode.connect(analyser);
     analyser.connect(ctx.destination);
