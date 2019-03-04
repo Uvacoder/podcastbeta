@@ -30,8 +30,8 @@
           </audio>
           <div class="all-btns">
             <button @click="rewind">Rewind</button>
-            <button v-if="!playStatus" @click="play(), playStatus = true">Play</button>
-            <button v-else @click="pause(), playStatus = false">Pause</button>
+            <button v-if="!playStatus" @click="play">Play</button>
+            <button v-else @click="pause">Pause</button>
             <button @click="skip">Forward</button>
             <button v-if="!speed" @click="normalSpeed(), speed = true">1</button>
             <button v-else @click="playbackSpeed(), speed = false">1.5</button>
@@ -52,7 +52,7 @@ export default {
     return {
       episodeToPlay: null,
       episodeObject: null,
-      playStatus: false,
+      playStatus: true,
       currentProgress: 0,
       totalDuration: 0,
       speed: null,
@@ -65,9 +65,11 @@ export default {
   watch: {
     $route(to, from) {
       this.getSoundCloud();
-        this.data1 = null;
-      this.currentProgress = 0;
-      this.totalDuration = 0;
+      this.$refs.playerref.currentTime = 0
+      this.$refs.progressref.value = 0.1
+      this.data1 = null;
+      this.playStatus = true;
+        
       
     }
   },
@@ -128,10 +130,12 @@ export default {
     },
     play() {
       this.$refs.playerref.play();
-      this.getSoundCloud();
+      this.playStatus = true;
+      // this.getSoundCloud();
     },
     pause() {
       this.$refs.playerref.pause();
+      this.playStatus = false;
     },
     skip() {
      let player = this.$refs.playerref
@@ -154,7 +158,6 @@ export default {
       // let el = this.$refs.progressref;
       var x = e.pageX - this.$parent.$refs['myref'].getBoundingClientRect().width
       // var startPos = this.$refs.progressref.position;
-      // console.log(this.$refs['myref2'].getBoundingClientRect().width);
       var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
       var finalx = (xconvert).toFixed(1);
       this.$refs.progressref.value = finalx
