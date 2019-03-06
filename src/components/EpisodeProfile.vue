@@ -99,7 +99,8 @@ export default {
 
     // webaudio API;
     var audioElement = this.$refs.playerref
-      // audioElement.play()
+    // audioElement.src = this.episodeToPlay;
+    //   audioElement.play()
 
     var ctx = new AudioContext();
     var sourceNode = ctx.createMediaElementSource(audioElement);
@@ -109,7 +110,8 @@ export default {
     analyser.fftSize = 1024;
     sourceNode.connect(analyser);
     analyser.connect(ctx.destination);
-    this.analyser1 = analyser
+    this.analyser1 = analyser;
+    // audioElement.play();
 
   
 
