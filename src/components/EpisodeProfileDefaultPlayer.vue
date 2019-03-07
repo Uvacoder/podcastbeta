@@ -11,32 +11,34 @@
       <div>
         <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
       </div>
+    </div>
+    <div class="profile-container">      
       <div class="profile-content-player">
         <div class="audiovisualizer">
           <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
         </div>
-        <p class="timer">{{ currentProgress }} / {{ totalDuration }}</p>
+        <p>{{ currentProgress }} / {{ totalDuration }}</p>
         <div class="audio-player">
           <audio ref="playerref"
             :ontimeupdate.prop="updateProgress" 
             id="player"
-            :src="episodeToPlay"
-            autoplay
-       
+            
+          
+            
+        
             >
           </audio>
-          <div class="ui buttons">
+          <div class="all-btns">
             <button @click="rewind">Rewind</button>
-            <button class="ui button" v-if="!playStatus" @click="play">Play</i></button>
-            <!-- <button class="ui button"><i class="play icon">Play</i></button> -->
+            <button v-if="!playStatus" @click="play">Play</button>
             <button v-else @click="pause">Pause</button>
             <button @click="skip">Forward</button>
             <button v-if="!speed" @click="normalSpeed(), speed = true">1</button>
             <button v-else @click="playbackSpeed(), speed = false">1.5</button>
           </div>
         </div>
-      </div> 
-    </div> 
+      </div>   
+    </div>    
   </div>
 </template>
 
@@ -44,7 +46,7 @@
 import axios from "axios";
 
 export default {
-  name: "EpisodeProfile",
+  name: "EpisodeProfileDefaultPlayer",
   props: ["episodes"],
   data() {
     return {
@@ -121,6 +123,26 @@ export default {
       this.$refs.playerref.play();
       this.playStatus = true;
 
+var audioElement = this.$refs.playerref
+audioElement.crossorigin = "anonymous";
+audioElement.src = require('./../assets/SampleAudio.mp3')
+       var ctx = new AudioContext();
+    var sourceNode = ctx.createMediaElementSource(audioElement);
+
+    var analyser = ctx.createAnalyser();
+    analyser.smoothingTimeConstant = 0.5
+    analyser.fftSize = 1024;
+    sourceNode.connect(analyser);
+    analyser.connect(ctx.destination);
+    this.analyser1 = analyser;
+    audioElement.play();
+      
+
+    var frequencyData = new Uint8Array(64);
+    analyser.frequencyBinCount
+    analyser.getByteFrequencyData(frequencyData);
+    this.data1 = frequencyData;
+
       // this.getSoundCloud();
     },
     pause() {
@@ -160,6 +182,12 @@ export default {
 
     updateProgress() {
       
+      // code for webaudio api, rather than in setinterval loop
+      var frequencyData = new Uint8Array(64);
+      this.analyser1.getByteFrequencyData(frequencyData);
+      this.data1 = frequencyData;
+      console.log(this.data1)
+      
       // code for updating progress value bar
       const player = this.$refs.playerref;
       const progressbar = this.$refs.progressref;
@@ -191,25 +219,27 @@ img {
   width: 50%;
 }
 
-
+.profile-desc {
+    /* overflow: auto;
+    height: 350px; */
+    font-size: 0.8em;
+}
 
 .audiovisualizer {
-  /* height: 330px; */
-  height: 100px;
+  height: 330px;
   width: 400px;
-  /* background-color: white; */
-  background-color: #eee;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .profile-content {
-  /* background-color: #5000FF; */
-  /* color: white; */
+  /* display: flex; */
+  background-color: #5000FF;
+  color: white;
   position: relative;
-  border: 1px solid #eee;
-  /* border-radius: 0 5px 5px 0; */
+  border-radius: 0 5px 5px 0;
 }
 
 img {
@@ -219,16 +249,17 @@ img {
 .profile-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  /* padding-top: 250px; */
 }
 
 .profile-content-info {
-  padding: 50px;
-  display: flex;
-  justify-content: space-evenly;
-  /* align-items: center; */
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .profile-title-desc {
@@ -236,7 +267,7 @@ img {
 }
 
 .profile-content-player {
-  margin: 0 50px 50px 50px;
+  margin: 50px;
 }
 
 
@@ -274,14 +305,13 @@ button {
   border: 0;
   height: 100px;
   width: 100px;
-  /* background-color: #5000FF; */
+  background-color: #5000FF;
   border: 1px solid white;
-  /* color: white; */
+  color: white;
   font-weight: bold;
   position: relative;
   z-index: 1;
 }
-
 p {
 white-space: pre-wrap;
 font-size: 1rem;
@@ -294,7 +324,7 @@ color: rgba(255,255,255,0.75);
   background-color: orangered;
 } */
 
-/* button::after {
+button::after {
   position: absolute;
   content: '';
   bottom: 0;
@@ -302,14 +332,14 @@ color: rgba(255,255,255,0.75);
   right: 0;
   width: 100%;
   height: 0;
-  background-color: #EFD5C3;
+  background-color: orangered;
   transition: 0.25s ease;
   z-index:-1;
 }
 
 button:hover::after {
   height: 100%;
-} */
+}
 
 .changeheight {
   display: flex;
@@ -318,16 +348,5 @@ button:hover::after {
   color: white;
   width: 6px;
   justify-items: center;
-}
-
-.profile-desc {
-    /* overflow: auto;
-    height: 350px; */
-    font-size: 0.8em;
-    color: black;
-}
-
-.timer {
-  color: black;
 }
 </style>

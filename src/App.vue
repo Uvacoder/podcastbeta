@@ -5,13 +5,14 @@
         <!-- <img class="logo" src="./assets/logo1.png" /> -->
         <h1 class="logo">LOGO</h1>
         <div class="category-link">
-          <router-link :to="{ path: '/Art/' }" class="category-path">Art</router-link>
-          <router-link :to="{ path: '/Business/' }" class="category-path">Business</router-link>          
-          <router-link :to="{ path: '/Crime/' }" class="category-path">Crime</router-link>
-          <router-link :to="{ path: '/Food/' }" class="category-path">Food</router-link>
-          <router-link :to="{ path: '/Movies/' }" class="category-path">Movies</router-link>
-          <router-link :to="{ path: '/Music/' }" class="category-path">Music</router-link>
-          <router-link :to="{ path: '/Technology/' }" class="category-path">Technology</router-link>
+          <router-link :to="{ path: '/Topic/Art/' }">Art</router-link>
+          <router-link :to="{ path: '/Topic/Business/' }">Business</router-link>
+          <router-link :to="{ path: '/Topic/Crime/' }">Crime</router-link>
+          <router-link :to="{ path: '/Topic/Food/' }">Food</router-link>
+          <router-link :to="{ path: '/Topic/Movies/' }">Movies</router-link>
+          <router-link :to="{ path: '/Topic/Music/' }">Music</router-link>
+          <router-link :to="{ path: '/Topic/Startup/' }">Startup</router-link>
+          <router-link :to="{ path: '/Topic/Technology/' }">Technology</router-link>
         </div>
         <SearchBar @inputChange="onInputChange"/>
       </div>
@@ -32,13 +33,15 @@ import axios from "axios";
 import EpisodeList from "./components/EpisodeList";
 import EpisodeProfile from "./components/EpisodeProfile";
 import SearchBar from "./components/SearchBar";
+import EpisodeProfileDefaultPlayer from "./components/EpisodeProfileDefaultPlayer";
 
 export default {
   name: "App",
   components: {
     EpisodeList,
     EpisodeProfile,
-    SearchBar
+    SearchBar,
+    EpisodeProfileDefaultPlayer
   },
   data() {
     return {
