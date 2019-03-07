@@ -2,16 +2,16 @@
   <div class="app-content">
     <div ref="myref">
       <div class="app-header">
-        <img class="logo" src="./assets/logo1.png" />
+        <!-- <img class="logo" src="./assets/logo1.png" /> -->
+        <h1 class="logo">LOGO</h1>
         <div class="category-link">
-          <router-link :to="{ path: '/Art/' }">Art</router-link>
-          <router-link :to="{ path: '/Business/' }">Business</router-link>
-          <router-link :to="{ path: '/Coding/' }">Coding</router-link>
-          <router-link :to="{ path: '/Crime/' }">Crime</router-link>
-          <router-link :to="{ path: '/Food/' }">Food</router-link>
-          <router-link :to="{ path: '/Movies/' }">Movies</router-link>
-          <router-link :to="{ path: '/Music/' }">Music</router-link>
-          <router-link :to="{ path: '/Technology/' }">Technology</router-link>
+          <router-link :to="{ path: '/Art/' }" class="category-path">Art</router-link>
+          <router-link :to="{ path: '/Business/' }" class="category-path">Business</router-link>          
+          <router-link :to="{ path: '/Crime/' }" class="category-path">Crime</router-link>
+          <router-link :to="{ path: '/Food/' }" class="category-path">Food</router-link>
+          <router-link :to="{ path: '/Movies/' }" class="category-path">Movies</router-link>
+          <router-link :to="{ path: '/Music/' }" class="category-path">Music</router-link>
+          <router-link :to="{ path: '/Technology/' }" class="category-path">Technology</router-link>
         </div>
         <SearchBar @inputChange="onInputChange"/>
       </div>
@@ -105,21 +105,32 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px;
+  padding: 0 20px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
 }
 
 .app-body {
   display: flex;
+  padding-top: 20px;
 }
 
 .logo {
   /* padding-top: 40px;
-  padding-left: 5px; */
-  height: 100px;
+  padding-left: 5px;
+  height: 100px; */
+  color: #C3DFE0;
 }
 
 .category-link {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.category-path {
   text-decoration: none;
+  color: black;
+  text-transform: uppercase;
 }
 
 </style>

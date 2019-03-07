@@ -28,5 +28,7 @@ ul {
   padding: 0;
   margin: 0;
   width: 35vw;
+  overflow: auto;
+  height: 98vh;
 }
 </style>
