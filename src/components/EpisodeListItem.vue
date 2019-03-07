@@ -1,8 +1,8 @@
 <template>
   <router-link :to="{ path: episode.id }" class="link-decoration">
-    <li class="list-group-item media link-decoration link-content">
+    <li class="card link-decoration link-content">
       <img class="mr-3" :src="episode.image" />
-      <p class="media-body">{{ episode.title_original }}</p>
+      <p class="card-body">{{ episode.title_original }}</p>
     </li>
   </router-link>
 </template>
@@ -15,18 +15,19 @@ export default {
 </script>
 
 <style scoped>
-.media {
+.card {
   display: flex;
+  border: 1px solid #eee;
+  border-radius: 5px;
 }
 
-.media-body {
+.card-body {
   width: inherit;
   margin: 0;
   padding: 16px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 0.9em;
-  background-color: #F3F4F5;
   display: flex;
   align-items: center;
   text-align: center;
@@ -34,7 +35,7 @@ export default {
 
 .link-decoration {
   text-decoration: none;
-  color: #4F00FF;
+  color: black; 
 }
 
 li:hover {
@@ -42,6 +43,10 @@ li:hover {
 }
 
 .link-content {
-  padding: 0 20px 14px 20px;
+  margin: 0 20px 14px 20px;
+}
+
+img {
+  border-radius: 5px 0 0 5px;
 }
 </style>
