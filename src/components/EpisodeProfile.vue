@@ -58,7 +58,8 @@ export default {
       data1: null,
       boxposition: null,
       analyser1: null,
-      analyser2: null
+      analyser2: null,
+      defaultSeries: 'Business'
     };
   },
   watch: {
@@ -87,7 +88,7 @@ export default {
       // this.data1 = null;
       const CLIENT_ID_LISTEN = process.env.VUE_APP_CLIENT_ID_LISTEN;
       const response = await axios.get(
-        `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series}`, {
+        `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series || this.defaultSeries}`, {
             headers: {
               'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
             }
@@ -95,8 +96,8 @@ export default {
       const result = response.data.results.find(
         findid => findid.id === `${this.$route.params.id}`
       );
-      this.episodeObject = result;
-      this.episodeToPlay = result.audio
+      this.episodeObject = (result || response.data.results[0]);
+      this.episodeToPlay = (result.audio || response.data.results[0].audio);
        
 
     // webaudio API;

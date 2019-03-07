@@ -44,7 +44,8 @@ export default {
     return {
       episodes: [],
       currentPodcastUrl: null,
-      inputChange: ""
+      inputChange: "",
+      defaultSeries: "Business"
     };
   },
   mounted() {
@@ -68,7 +69,7 @@ export default {
 
       axios
         .get(
-          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series}`, {
+          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series || this.defaultSeries}`, {
             headers: {
               'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
             }
@@ -76,13 +77,12 @@ export default {
         )
         .then(response => {
           console.log(response);
+          console.log(this.$route.params.series)
           this.episodes = response.data.results;
-          console.log(this.episodes);
         });
     },
     onInputChange(inputChange) {      
       this.inputChange = inputChange;
-      console.log(this.inputChange);
     }
   }
 };
