@@ -22,9 +22,10 @@
           <audio ref="playerref"
             :ontimeupdate.prop="updateProgress" 
             id="player"
-            :src="episodeToPlay"
-            autoplay
-       
+            
+          
+            
+        
             >
           </audio>
           <div class="all-btns">
@@ -45,7 +46,7 @@
 import axios from "axios";
 
 export default {
-  name: "EpisodeProfile",
+  name: "EpisodeProfileDefaultPlayer",
   props: ["episodes"],
   data() {
     return {
@@ -122,6 +123,26 @@ export default {
       this.$refs.playerref.play();
       this.playStatus = true;
 
+var audioElement = this.$refs.playerref
+audioElement.crossorigin = "anonymous";
+audioElement.src = require('./../assets/SampleAudio.mp3')
+       var ctx = new AudioContext();
+    var sourceNode = ctx.createMediaElementSource(audioElement);
+
+    var analyser = ctx.createAnalyser();
+    analyser.smoothingTimeConstant = 0.5
+    analyser.fftSize = 1024;
+    sourceNode.connect(analyser);
+    analyser.connect(ctx.destination);
+    this.analyser1 = analyser;
+    audioElement.play();
+      
+
+    var frequencyData = new Uint8Array(64);
+    analyser.frequencyBinCount
+    analyser.getByteFrequencyData(frequencyData);
+    this.data1 = frequencyData;
+
       // this.getSoundCloud();
     },
     pause() {
@@ -160,6 +181,12 @@ export default {
     },
 
     updateProgress() {
+      
+      // code for webaudio api, rather than in setinterval loop
+      var frequencyData = new Uint8Array(64);
+      this.analyser1.getByteFrequencyData(frequencyData);
+      this.data1 = frequencyData;
+      console.log(this.data1)
       
       // code for updating progress value bar
       const player = this.$refs.playerref;
