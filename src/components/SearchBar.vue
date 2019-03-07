@@ -22,7 +22,7 @@ export default {
 input {
   font-family: inherit;
   font-size: 1.2em;
-  width: 100%;
+  width: 22vw;
   border: none;
   border-bottom: 2px solid #DDD;
   height: 35px;
@@ -34,9 +34,9 @@ input:focus {
   border-bottom-color: #4F00FF;
 }
 
-div{
+/* div{
   margin: 5px;
   margin-top: 30px;
   margin-bottom: 20px;
-}
+} */
 </style>

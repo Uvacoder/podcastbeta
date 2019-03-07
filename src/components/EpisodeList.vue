@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="list-group col-md-12">
+    <ul>
       <EpisodeListItem
         v-for="episode in episodes"
         :episode="episode"
@@ -26,5 +26,8 @@ export default {
 <style>
 ul {
   padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 30vw;
 }
 </style>
