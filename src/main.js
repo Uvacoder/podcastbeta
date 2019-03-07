@@ -21,10 +21,22 @@ export const router = new Router({
       path: "/:series/",
       name: "episodelist",
       components: {
+        a: EpisodeProfile,
         b: EpisodeList
       }
-    }
-
+    },
+    //   {
+    //     path: "/",
+    //     name: "episodedefault",
+    //     components: {
+    //       a: EpisodeProfile,
+    //       b: EpisodeList
+    //     }
+    // },
+    {
+      path: '/',
+      redirect: '/business/'
+    },
   ]
 });
 
