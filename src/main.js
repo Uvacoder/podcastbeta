@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import Router from "vue-router";
 import EpisodeProfile from "./components/EpisodeProfile.vue";
+import EpisodeList from "./components/EpisodeList.vue";
 
 Vue.use(Router);
 
@@ -9,10 +10,21 @@ export const router = new Router({
   mode: "history",
   routes: [
     {
-      path: "/profile/:id",
+      path: "/:series/:id",
       name: "episodestart",
-      component: EpisodeProfile
+      components: {
+        a: EpisodeProfile,
+        b: EpisodeList
+      }
+    },
+    {
+      path: "/:series/",
+      name: "episodelist",
+      components: {
+        b: EpisodeList
+      }
     }
+
   ]
 });
 

@@ -2,9 +2,9 @@
   <div class="profile-content" ref="myref2">
     <div class="profile-container">
       <div class="profile-content-info">
-        <img v-if="episodeObject" :src="thumbnailImage" />
-        <h1>{{ episodeObject.title }}</h1>
-        <p>{{ episodeObject.description }}</p>
+        <img v-if="episodeObject" :src="episodeObject.image" />
+        <h1>{{ episodeObject.title_original }}</h1>
+        <p>{{ episodeObject.description_original }}</p>
         
       </div>
       <div>
@@ -25,7 +25,6 @@
             id="player"
             :src="episodeToPlay"
             autoplay
-            crossorigin="anonymous"
             >
           </audio>
           <div class="all-btns">
@@ -86,16 +85,19 @@ export default {
   methods: {
     async getSoundCloud() {
       // this.data1 = null;
-      const CLIENT_ID = process.env.VUE_APP_CLIENT_ID;
+      const CLIENT_ID_LISTEN = process.env.VUE_APP_CLIENT_ID_LISTEN;
       const response = await axios.get(
-        `https://api.soundcloud.com/users/235518337/tracks?client_id=${CLIENT_ID}&limit=10&linked_partitioning=0&offset=0`
-      );
-      const result = response.data.collection.find(
-        findid => findid.id === Number(`${this.$route.params.id}`)
+        `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series}`, {
+            headers: {
+              'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
+            }
+          });
+      const result = response.data.results.find(
+        findid => findid.id === `${this.$route.params.id}`
       );
       this.episodeObject = result;
-      this.episodeToPlay = `${result.stream_url +
-        "?client_id=" + CLIENT_ID}`;
+      this.episodeToPlay = result.audio
+       
 
     // webaudio API;
     var audioElement = this.$refs.playerref
