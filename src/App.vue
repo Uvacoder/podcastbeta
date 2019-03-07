@@ -1,29 +1,24 @@
 <template>
   <div class="app-content">
-
-    <div>
-      <router-link :to="{ path: '/Business/' }">Business</router-link>
-      <router-link :to="{ path: '/Crime/' }">Crime</router-link>
-      <router-link :to="{ path: '/Technology/' }">Technology</router-link>
-
-    </div>
     <div ref="myref">
-
-    <div class="app-header">
-      <img class="logo" src="./assets/logo1.png" />
-      category
-      <SearchBar @inputChange="onInputChange"/>
-
-    </div>
-    <div class="app-body">
-      <div>
-   <router-view name="a" />
+      <div class="app-header">
+        <img class="logo" src="./assets/logo1.png" />
+        <div class="category-link">
+          <router-link :to="{ path: '/Business/' }">Business</router-link>
+          <router-link :to="{ path: '/Crime/' }">Crime</router-link>
+          <router-link :to="{ path: '/Technology/' }">Technology</router-link>
+        </div>
+        <SearchBar @inputChange="onInputChange"/>
       </div>
-      <div ref="myref">  
-      <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes"/>
+      <div class="app-body">
+        <div>
+          <router-view name="a" />
+        </div>
+        <div ref="myref">  
+          <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes"/>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -117,4 +112,9 @@ body {
   padding-left: 5px; */
   height: 100px;
 }
+
+.category-link {
+  text-decoration: none;
+}
+
 </style>

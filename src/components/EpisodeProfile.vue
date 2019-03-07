@@ -4,14 +4,13 @@
       <div class="profile-content-info">
         <img v-if="episodeObject" :src="episodeObject.image" />
         <div class="profile-title-desc">
-        <h1>{{ episodeObject.title_original }}</h1>
-         <p class="profile-desc">{{ episodeObject.description_original }}</p>
-          </div>
-        
+          <h1>{{ episodeObject.title_original }}</h1>
+          <p class="profile-desc">{{ episodeObject.description_original }}</p>
+        </div>        
       </div>
-      <div>
+      <!-- <div>
         <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
-      </div>
+      </div> -->
     </div>
     <div class="profile-container">      
       <div class="profile-content-player">
@@ -203,9 +202,17 @@ h1 {
   margin: 0 0 20px 0;
 }
 
+img {
+  border-radius: 5px;
+}
+
+.profile-title-desc {
+  width: 50%;
+}
+
 .profile-desc {
-    overflow: auto;
-    height: 350px;
+    /* overflow: auto;
+    height: 350px; */
     font-size: 0.8em;
 }
 
@@ -223,10 +230,11 @@ h1 {
   background-color: #5000FF;
   color: white;
   position: relative;
+  border-radius: 0 5px 5px 0;
 }
 
 img {
-  height: 450px;
+  height: 300px;
 }
 
 .profile-container {
@@ -239,8 +247,10 @@ img {
 }
 
 .profile-content-info {
-  margin: 50px;
-  display: flex;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .profile-title-desc {

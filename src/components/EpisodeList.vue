@@ -27,7 +27,6 @@ export default {
 ul {
   padding: 0;
   margin: 0;
-  height: 100vh;
-  width: 30vw;
+  width: 35vw;
 }
 </style>
