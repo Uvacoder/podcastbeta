@@ -11,13 +11,11 @@
       <div>
         <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
       </div>
-    </div>
-    <div class="profile-container">      
       <div class="profile-content-player">
         <div class="audiovisualizer">
           <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
         </div>
-        <p>{{ currentProgress }} / {{ totalDuration }}</p>
+        <p class="timer">{{ currentProgress }} / {{ totalDuration }}</p>
         <div class="audio-player">
           <audio ref="playerref"
             :ontimeupdate.prop="updateProgress" 
@@ -27,17 +25,18 @@
        
             >
           </audio>
-          <div class="all-btns">
+          <div class="ui buttons">
             <button @click="rewind">Rewind</button>
-            <button v-if="!playStatus" @click="play">Play</button>
+            <button class="ui button" v-if="!playStatus" @click="play">Play</i></button>
+            <!-- <button class="ui button"><i class="play icon">Play</i></button> -->
             <button v-else @click="pause">Pause</button>
             <button @click="skip">Forward</button>
             <button v-if="!speed" @click="normalSpeed(), speed = true">1</button>
             <button v-else @click="playbackSpeed(), speed = false">1.5</button>
           </div>
         </div>
-      </div>   
-    </div>    
+      </div> 
+    </div> 
   </div>
 </template>
 
@@ -192,27 +191,25 @@ img {
   width: 50%;
 }
 
-.profile-desc {
-    /* overflow: auto;
-    height: 350px; */
-    font-size: 0.8em;
-}
+
 
 .audiovisualizer {
-  height: 330px;
+  /* height: 330px; */
+  height: 100px;
   width: 400px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #eee;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .profile-content {
-  /* display: flex; */
-  background-color: #5000FF;
-  color: white;
+  /* background-color: #5000FF; */
+  /* color: white; */
   position: relative;
-  border-radius: 0 5px 5px 0;
+  border: 1px solid #eee;
+  /* border-radius: 0 5px 5px 0; */
 }
 
 img {
@@ -222,17 +219,16 @@ img {
 .profile-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  
-  /* padding-top: 250px; */
 }
 
 .profile-content-info {
-    height: 100vh;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  padding: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
 }
 
 .profile-title-desc {
@@ -240,7 +236,7 @@ img {
 }
 
 .profile-content-player {
-  margin: 50px;
+  margin: 0 50px 50px 50px;
 }
 
 
@@ -278,13 +274,14 @@ button {
   border: 0;
   height: 100px;
   width: 100px;
-  background-color: #5000FF;
+  /* background-color: #5000FF; */
   border: 1px solid white;
-  color: white;
+  /* color: white; */
   font-weight: bold;
   position: relative;
   z-index: 1;
 }
+
 p {
 white-space: pre-wrap;
 font-size: 1rem;
@@ -297,7 +294,7 @@ color: rgba(255,255,255,0.75);
   background-color: orangered;
 } */
 
-button::after {
+/* button::after {
   position: absolute;
   content: '';
   bottom: 0;
@@ -305,14 +302,14 @@ button::after {
   right: 0;
   width: 100%;
   height: 0;
-  background-color: orangered;
+  background-color: #EFD5C3;
   transition: 0.25s ease;
   z-index:-1;
 }
 
 button:hover::after {
   height: 100%;
-}
+} */
 
 .changeheight {
   display: flex;
@@ -321,5 +318,16 @@ button:hover::after {
   color: white;
   width: 6px;
   justify-items: center;
+}
+
+.profile-desc {
+    /* overflow: auto;
+    height: 350px; */
+    font-size: 0.8em;
+    color: black;
+}
+
+.timer {
+  color: black;
 }
 </style>

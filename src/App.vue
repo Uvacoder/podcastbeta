@@ -2,11 +2,11 @@
   <div class="app-content">
     <div ref="myref">
       <div class="app-header">
-        <img class="logo" src="./assets/logo1.png" />
+        <!-- <img class="logo" src="./assets/logo1.png" /> -->
+        <h1 class="logo">LOGO</h1>
         <div class="category-link">
           <router-link :to="{ path: '/Topic/Art/' }">Art</router-link>
           <router-link :to="{ path: '/Topic/Business/' }">Business</router-link>
-          <router-link :to="{ path: '/Topic/Coding/' }">Coding</router-link>
           <router-link :to="{ path: '/Topic/Crime/' }">Crime</router-link>
           <router-link :to="{ path: '/Topic/Food/' }">Food</router-link>
           <router-link :to="{ path: '/Topic/Movies/' }">Movies</router-link>
@@ -108,21 +108,32 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px;
+  padding: 0 20px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
 }
 
 .app-body {
   display: flex;
+  padding-top: 20px;
 }
 
 .logo {
   /* padding-top: 40px;
-  padding-left: 5px; */
-  height: 100px;
+  padding-left: 5px;
+  height: 100px; */
+  color: #C3DFE0;
 }
 
 .category-link {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.category-path {
   text-decoration: none;
+  color: black;
+  text-transform: uppercase;
 }
 
 </style>
