@@ -1,8 +1,8 @@
 <template>
-  <router-link :to="{ path: '/profile/' + episode.id }" class="link-decoration">
+  <router-link :to="{ path: episode.id }" class="link-decoration">
     <li class="list-group-item media link-decoration link-content">
-      <img class="mr-3" :src="episode.artwork_url" />
-      <p class="media-body">{{ episode.title }}</p>
+      <img class="mr-3" :src="episode.image" />
+      <p class="media-body">{{ episode.title_original }}</p>
     </li>
   </router-link>
 </template>

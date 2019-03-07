@@ -1,16 +1,26 @@
 <template>
   <div class="app-content">
+
+    <div>
+      <router-link :to="{ path: '/Business/' }">Business</router-link>
+      <router-link :to="{ path: '/Crime/' }">Crime</router-link>
+      <router-link :to="{ path: '/Technology/' }">Technology</router-link>
+
+    </div>
+    <div ref="myref">
+
     <div class="app-header">
       <img class="logo" src="./assets/logo1.png" />
       category
       <SearchBar @inputChange="onInputChange"/>
+
     </div>
     <div class="app-body">
       <div>
-        <router-view />
+   <router-view name="a" />
       </div>
-      <div ref="myref">      
-        <EpisodeList v-if="filteredepisodes" :episodes="filteredepisodes" />
+      <div ref="myref">  
+      <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes"/>
       </div>
     </div>
   </div>
@@ -39,24 +49,34 @@ export default {
   mounted() {
     this.getSoundCloud();
   },
+   watch: {
+    $route(to, from) {
+      this.getSoundCloud();
+    }
+  },
   computed: {
     filteredepisodes: function() {
       return this.episodes.filter((episode) => {
-        return episode.title.toLowerCase().match(this.inputChange.toLowerCase());
+        return episode.title_original.toLowerCase().match(this.inputChange.toLowerCase());
       });
     }
   },
   methods: {
     getSoundCloud() {
-      const CLIENT_ID = process.env.VUE_APP_CLIENT_ID;
+      const CLIENT_ID_LISTEN = process.env.VUE_APP_CLIENT_ID_LISTEN;
 
       axios
         .get(
-          `https://api.soundcloud.com/users/235518337/tracks?client_id=${CLIENT_ID}&limit=10&linked_partitioning=0&offset=0`
+          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series}`, {
+            headers: {
+              'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
+            }
+          }
         )
         .then(response => {
           console.log(response);
-          this.episodes = response.data.collection;
+          this.episodes = response.data.results;
+          console.log(this.episodes);
         });
     },
     onInputChange(inputChange) {      
