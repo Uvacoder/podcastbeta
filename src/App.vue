@@ -4,8 +4,13 @@
       <div class="app-header">
         <img class="logo" src="./assets/logo1.png" />
         <div class="category-link">
+          <router-link :to="{ path: '/Art/' }">Art</router-link>
           <router-link :to="{ path: '/Business/' }">Business</router-link>
+          <router-link :to="{ path: '/Coding/' }">Coding</router-link>
           <router-link :to="{ path: '/Crime/' }">Crime</router-link>
+          <router-link :to="{ path: '/Food/' }">Food</router-link>
+          <router-link :to="{ path: '/Movies/' }">Movies</router-link>
+          <router-link :to="{ path: '/Music/' }">Music</router-link>
           <router-link :to="{ path: '/Technology/' }">Technology</router-link>
         </div>
         <SearchBar @inputChange="onInputChange"/>
