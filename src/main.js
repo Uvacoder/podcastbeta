@@ -36,7 +36,7 @@ export const router = new Router({
     },
     {
       path: '/',
-      redirect: '/art/'
+      redirect: '/topic/art/'
     },
   ]
 });

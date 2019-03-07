@@ -27,7 +27,7 @@
           </audio>
           <div class="ui buttons">
             <button @click="rewind">Rewind</button>
-            <button class="ui button" v-if="!playStatus" @click="play">Play</i></button>
+            <button class="ui button" v-if="!playStatus" @click="play">Play</button>
             <!-- <button class="ui button"><i class="play icon">Play</i></button> -->
             <button v-else @click="pause">Pause</button>
             <button @click="skip">Forward</button>

@@ -5,14 +5,14 @@
         <!-- <img class="logo" src="./assets/logo1.png" /> -->
         <h1 class="logo">LOGO</h1>
         <div class="category-link">
-          <router-link :to="{ path: '/Topic/Art/' }">Art</router-link>
-          <router-link :to="{ path: '/Topic/Business/' }">Business</router-link>
-          <router-link :to="{ path: '/Topic/Crime/' }">Crime</router-link>
-          <router-link :to="{ path: '/Topic/Food/' }">Food</router-link>
-          <router-link :to="{ path: '/Topic/Movies/' }">Movies</router-link>
-          <router-link :to="{ path: '/Topic/Music/' }">Music</router-link>
-          <router-link :to="{ path: '/Topic/Startup/' }">Startup</router-link>
-          <router-link :to="{ path: '/Topic/Technology/' }">Technology</router-link>
+          <router-link :to="{ path: '/Topic/Art/' }" class="category-path">Art</router-link>
+          <router-link :to="{ path: '/Topic/Business/' }" class="category-path">Business</router-link>
+          <router-link :to="{ path: '/Topic/Crime/' }" class="category-path">Crime</router-link>
+          <router-link :to="{ path: '/Topic/Food/' }" class="category-path">Food</router-link>
+          <router-link :to="{ path: '/Topic/Movies/' }" class="category-path">Movies</router-link>
+          <router-link :to="{ path: '/Topic/Music/' }" class="category-path">Music</router-link>
+          <router-link :to="{ path: '/Topic/Startup/' }" class="category-path">Startup</router-link>
+          <router-link :to="{ path: '/Topic/Technology/' }" class="category-path">Technology</router-link>
         </div>
         <SearchBar @inputChange="onInputChange"/>
       </div>
