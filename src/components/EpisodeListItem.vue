@@ -20,7 +20,7 @@ export default {
 }
 
 .media-body {
-  width: 15vw;
+  width: inherit;
   margin: 0;
   padding: 16px;
   text-transform: uppercase;
@@ -42,6 +42,6 @@ li:hover {
 }
 
 .link-content {
-  padding: 5px;
+  padding: 0 20px 14px 20px;
 }
 </style>

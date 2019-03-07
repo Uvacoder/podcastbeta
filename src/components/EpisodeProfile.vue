@@ -3,20 +3,19 @@
     <div class="profile-container">
       <div class="profile-content-info">
         <img v-if="episodeObject" :src="thumbnailImage" />
-        <h1>{{ episodeObject.title }}</h1>
-        <p>{{ episodeObject.description }}</p>
-        
+        <div class="profile-title-desc">
+          <h1>{{ episodeObject.title }}</h1>
+          <p class="profile-desc">{{ episodeObject.description }}</p>
+        </div>
       </div>
       <div>
         <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
       </div>
     </div>
-    <div class="profile-container">
-      
+    <div class="profile-container">      
       <div class="profile-content-player">
         <div class="audiovisualizer">
-                <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
-
+          <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
         </div>
         <p>{{ currentProgress }} / {{ totalDuration }}</p>
         <div class="audio-player">
@@ -196,6 +195,16 @@ export default {
 
 <style scoped>
 
+h1 {
+  margin: 0 0 20px 0;
+}
+
+.profile-desc {
+    overflow: auto;
+    height: 350px;
+    font-size: 0.8em;
+}
+
 .audiovisualizer {
   height: 330px;
   width: 400px;
@@ -206,7 +215,7 @@ export default {
 }
 
 .profile-content {
-  display: flex;
+  /* display: flex; */
   background-color: #5000FF;
   color: white;
   position: relative;
@@ -226,12 +235,16 @@ img {
 }
 
 .profile-content-info {
-  width: 80%;
-  height: 80%;
+  margin: 50px;
+  display: flex;
+}
+
+.profile-title-desc {
+  margin: 0 20px;
 }
 
 .profile-content-player {
-  height: 80%;
+  margin: 50px;
 }
 
 

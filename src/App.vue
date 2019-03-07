@@ -1,12 +1,17 @@
 <template>
   <div class="app-content">
-    <div ref="myref">
+    <div class="app-header">
       <img class="logo" src="./assets/logo1.png" />
+      category
       <SearchBar @inputChange="onInputChange"/>
-      <EpisodeList v-if="filteredepisodes" :episodes="filteredepisodes" />
     </div>
-    <div>
-      <router-view />
+    <div class="app-body">
+      <div>
+        <router-view />
+      </div>
+      <div ref="myref">      
+        <EpisodeList v-if="filteredepisodes" :episodes="filteredepisodes" />
+      </div>
     </div>
   </div>
 </template>
@@ -70,14 +75,25 @@ body {
 
 .app-content {
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   font-family: 'Lato', sans-serif;
   letter-spacing: 0.5px;
 }
 
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.app-body {
+  display: flex;
+}
+
 .logo {
-  padding-top: 40px;
-  padding-left: 5px;
-  width: 220px;
+  /* padding-top: 40px;
+  padding-left: 5px; */
+  height: 100px;
 }
 </style>
