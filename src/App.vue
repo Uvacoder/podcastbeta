@@ -1,8 +1,11 @@
 <template>
+<div>
+  <LoadingScreen :isLoading="isLoading" />
+    <div v-if="!isLoading">
   <div class="app-content">
+    
     <div ref="myref">
       <div class="app-header">
-        <!-- <img class="logo" src="./assets/logo1.png" /> -->
         <h1 class="logo">LOGO</h1>
         <div class="category-link">
           <router-link :to="{ path: '/Topic/Art/' }" class="category-path">Art</router-link>
@@ -26,6 +29,8 @@
       </div>
     </div>
   </div>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -34,10 +39,12 @@ import EpisodeList from "./components/EpisodeList";
 import EpisodeProfile from "./components/EpisodeProfile";
 import SearchBar from "./components/SearchBar";
 import EpisodeProfileDefaultPlayer from "./components/EpisodeProfileDefaultPlayer";
+import LoadingScreen from './components/LoadingScreen';
 
 export default {
   name: "App",
   components: {
+    LoadingScreen,
     EpisodeList,
     EpisodeProfile,
     SearchBar,
@@ -48,10 +55,15 @@ export default {
       episodes: [],
       currentPodcastUrl: null,
       inputChange: "",
-      defaultSeries: "Business"
+      defaultSeries: "Business",
+      isLoading: true
     };
   },
   mounted() {
+     setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+
     this.getSoundCloud();
   },
    watch: {
