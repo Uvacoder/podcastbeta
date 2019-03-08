@@ -146,7 +146,8 @@ export default {
 
     progressClick(e) {
       // let el = this.$refs.progressref;
-      var x = e.pageX - this.$parent.$refs['myref'].getBoundingClientRect().width
+      var x = e.pageX  
+      // - this.$parent.$refs['myref'].getBoundingClientRect().width
       // var startPos = this.$refs.progressref.position;
       var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
       var finalx = (xconvert).toFixed(1);
