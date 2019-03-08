@@ -62,7 +62,7 @@ export default {
   mounted() {
      setTimeout(() => {
       this.isLoading = false;
-    }, 3000);
+    }, 2000);
 
     this.getSoundCloud();
   },
