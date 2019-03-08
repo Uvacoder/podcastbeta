@@ -25,14 +25,13 @@
        
             >
           </audio>
-          <div class="ui buttons">
-            <button @click="rewind">Rewind</button>
-            <button class="ui button" v-if="!playStatus" @click="play">Play</button>
-            <!-- <button class="ui button"><i class="play icon">Play</i></button> -->
-            <button v-else @click="pause">Pause</button>
-            <button @click="skip">Forward</button>
-            <button v-if="!speed" @click="normalSpeed(), speed = true">1</button>
-            <button v-else @click="playbackSpeed(), speed = false">1.5</button>
+          <div class="audio-controls">
+            <span class="ui button" @click="rewind"><i class="big backward icon" /></span>
+            <span class="ui button" v-if="!playStatus" @click="play"><i class="big play icon" /></span>
+            <span class="ui button" v-else @click="pause"><i class="big pause icon" /></span>
+            <span class="ui button" @click="skip"><i class="big forward icon" /></span>
+            <span class="ui button" v-if="!speed" @click="normalSpeed(), speed = true">1x</span>
+            <span class="ui button" v-else @click="playbackSpeed(), speed = false">1.5x</span>
           </div>
         </div>
       </div> 
@@ -204,6 +203,12 @@ img {
   align-items: center;
 }
 
+.audio-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .profile-content {
   /* background-color: #5000FF; */
   /* color: white; */
@@ -245,12 +250,21 @@ img {
   /* height: inherit; */
 }
 
-progress {
+/* progress {
   -webkit-appearance: none;
-  /* width: 100%; */
+  width: 100%;
   height: 100%;
   width: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
+} */
+
+progress {
+  -webkit-appearance: none;
+  height: 3px;
+  width: 40vw;
+  position: relative;
   top: 0;
   left: 0;
 }
@@ -260,8 +274,8 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-  background-color: rgba(255,255,255,0.34);
-  border-right: 1px solid orangered;
+  background-color: rgba(195, 223, 224, 0.3);
+  border-right: 5px solid #C3DFE0;
 }
 
 audio {
@@ -272,14 +286,31 @@ audio {
 button {
   padding: 0;
   border: 0;
-  height: 100px;
-  width: 100px;
+  height: 25px;
+  width: 25px;
   /* background-color: #5000FF; */
   border: 1px solid white;
-  /* color: white; */
+  border-radius: 5px;
+  color: black;
   font-weight: bold;
+  font-size: 0.8em;
   position: relative;
   z-index: 1;
+}
+
+button:focus {
+  outline: none;
+  /* border-bottom-color: #C3DFE0; */
+}
+
+.ui.button {
+  background: none;
+  color: black;
+}
+
+.ui.button:hover {
+  color: #C3DFE0;
+  background: none;
 }
 
 p {
@@ -290,9 +321,9 @@ color: rgba(255,255,255,0.75);
 /* font-family: 'ModernEra', 'Roboto', 'Noto', sans-serif; */
 }
 
-/* button:hover {
-  background-color: orangered;
-} */
+button:hover {
+  background-color: #C3DFE0;
+}
 
 /* button::after {
   position: absolute;
