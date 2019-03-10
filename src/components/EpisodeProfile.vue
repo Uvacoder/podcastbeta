@@ -21,7 +21,7 @@
             :ontimeupdate.prop="updateProgress" 
             id="player"
             :src="episodeToPlay"
-            autoplay
+           
        
             >
           </audio>
