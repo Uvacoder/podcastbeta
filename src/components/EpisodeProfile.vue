@@ -10,6 +10,7 @@
       </div>
       <div>
         <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
+        <!-- <input ref="progressref" id="seekslider" type="range" min="0" max="100" value="0" step="1" @mouseMove="onSeek"> -->
       </div>
       <div class="profile-content-player">
         <div class="audiovisualizer">
@@ -32,6 +33,8 @@
             <span class="ui button" @click="skip"><i class="big forward icon" /></span>
             <span class="ui button" v-if="!speed" @click="normalSpeed(), speed = true">1x</span>
             <span class="ui button" v-else @click="playbackSpeed(), speed = false">1.5x</span>
+            <!-- <span class="ui button" ><i class="big volume off icon" /></span>
+            <input id="volumeslider" type="range" min="0" max="100" value="100" step="1"> -->
           </div>
         </div>
       </div> 
@@ -58,6 +61,10 @@ export default {
       analyser1: null,
       analyser2: null,
       defaultSeries: 'Business'
+      // seekslider: null,
+      // volumeslider: null,
+      // seeking: false,
+      // seekTo: null
     };
   },
   watch: {
@@ -96,11 +103,7 @@ export default {
       );
       this.episodeObject = (result || response.data.results[0]);
       this.episodeToPlay = (result.audio || response.data.results[0].audio);
-
-
   
-       
-
     // webaudio API;
       
     // audioElement.src = this.episodeToPlay;
@@ -112,8 +115,6 @@ export default {
       //   this.data1 = frequencyData;
       //   console.log(this.data1)
       // }, 5000);
-
-
 
     },
     play() {
@@ -142,7 +143,18 @@ export default {
        let player = this.$refs.playerref
       player.playbackRate = 1;
     },
+    // onSeek(event) {
+    //   const player = this.$refs.playerref;
+    //   // const seekslider = document.getElementById("seekslider");
+    //   const seekslider = this.$refs.progressref;
 
+    //   if (this.seeking) {
+    //     seekslider.value = event.clientX - seekslider.offsetLeft;
+    //     this.seekTo = player.duration * (seekslider.value / 100);
+    //     player.currentTime = this.seekTo;
+        
+    //   }
+    // },
     progressClick(e) {
       // let el = this.$refs.progressref;
       var x = e.pageX  
@@ -157,7 +169,6 @@ export default {
       player.currentTime = finalseconds;
 
     },
-
     updateProgress() {
       
       // code for updating progress value bar
@@ -166,13 +177,19 @@ export default {
       progressbar.value = (player.currentTime / player.duration);
 
       const timeConvert = (num) => { 
-        const hours = Math.floor(num / 60);  
-        const minutes = Math.floor(num % 60);
-        return `${hours}:${minutes}`;  
+      //   const hours = Math.floor(num / 60);  
+      //   const minutes = Math.floor(num % 60);
+      //   return `${hours}:${minutes}`;
+        const date = new Date(null);
+        date.setSeconds(num);
+        const result = date.toISOString().slice(-10, -5);
+
+        return result;
       }
+
       this.currentProgress = timeConvert(player.currentTime);
-      this.totalDuration = timeConvert(player.duration); 
-    },
+      this.totalDuration = timeConvert(player.duration);
+    }
   }
 };
 </script>
