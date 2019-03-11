@@ -79,5 +79,6 @@ ul {
 
 p {
   display: hidden;
+  color: white;
 }
 </style>
