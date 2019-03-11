@@ -9,7 +9,6 @@
         </div>        
       </div>
       <div>
-        <!-- <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress> -->
         <input ref="progressref" class="seekslider" type="range" value="0" step="any" @change="onChange" @mouseup="onMouseUp" @mousedown="onMouseDown" >
         <div class="timer">
           <p class="time">{{ currentProgress }}</p>
@@ -17,9 +16,6 @@
         </div>
       </div>
       <div class="profile-content-player">
-        <!-- <div class="audiovisualizer">
-          <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
-        </div> -->
         <div class="audio-player">
           <audio ref="playerref"
             id="player"
@@ -105,19 +101,6 @@ export default {
       );
       this.episodeObject = (result || response.data.results[0]);
       this.episodeToPlay = (result.audio || response.data.results[0].audio);
-  
-    // webaudio API;
-      
-    // audioElement.src = this.episodeToPlay;
-    //   audioElement.play()
-
-   
-      // setInterval(function() {
-      //   this.analyser1.getByteFrequencyData(frequencyData);
-      //   this.data1 = frequencyData;
-      //   console.log(this.data1)
-      // }, 5000);
-
     },
     play() {
       this.$refs.playerref.play();
@@ -157,20 +140,6 @@ export default {
         player.muted = false;
       }
     },
-    // progressClick(e) {
-    //   // let el = this.$refs.progressref;
-    //   var x = e.pageX  
-    //   // - this.$parent.$refs['myref'].getBoundingClientRect().width
-    //   // var startPos = this.$refs.progressref.position;
-    //   var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
-    //   var finalx = (xconvert).toFixed(1);
-    //   this.$refs.progressref.value = finalx
-     
-    //   var player = this.$refs.playerref;
-    //   var finalseconds = xconvert*player.duration;
-    //   player.currentTime = finalseconds;
-
-    // },
     onLoadedMetaData() {
       const player = this.$refs.playerref;
       const progressbar = this.$refs.progressref;
@@ -229,17 +198,6 @@ img {
 
 .profile-title-desc {
   width: 50%;
-}
-
-.audiovisualizer {
-  /* height: 330px; */
-  height: 100px;
-  width: 400px;
-  /* background-color: white; */
-  background-color: #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .audio-controls {
@@ -380,15 +338,6 @@ button:hover {
 button:hover::after {
   height: 100%;
 } */
-
-.changeheight {
-  display: flex;
-  background-color: #5000FF;
-  /* border: 1px solid white; */
-  color: white;
-  width: 6px;
-  justify-items: center;
-}
 
 .profile-desc {
     /* overflow: auto;
