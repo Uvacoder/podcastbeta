@@ -1,17 +1,13 @@
 <template>
   <div> 
     <ul
-    ref="getHeightUl"
-      
-      
+        ref="getHeightUl"      
         @scroll="onScroll"
         >
       <EpisodeListItem
         v-for="episode in episodes"
         :episode="episode"
         :key="episode.id"
-        
-       
       >
       </EpisodeListItem>
     </ul>
@@ -35,18 +31,9 @@ export default {
     offsetHeightRef: 0,
     totalHeight: 0,
     pageTotal: 10
-    // didScroll: false
   }),
-  // mounted() {
-  //   this.onScroll = _.throttle(this.onScroll, 2000);
-  // },
-
 methods: {
-  // matchHeight() {
-  //   this.offsetHeightRef = this.$refs.scrollheightref.clientHeight
-  // },
     onScroll: _.throttle( function (e) {
-      // this.didScroll = true;
       this.offsetTop = e.target.scrollTop;
       this.offsetHeightRef = window.scrollY + window.innerHeight;
       this.totalHeight = this.$refs.getHeightUl.scrollHeight;
@@ -73,14 +60,7 @@ methods: {
           console.log(this.episodes)
         });
         this.pageTotal = this.pageTotal + 10
-
         e.target.scrollTop -= 200;
-
-
-
-    
-
-
       }
     
     }, 2000)
