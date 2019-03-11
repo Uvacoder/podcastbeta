@@ -9,21 +9,24 @@
         </div>        
       </div>
       <div>
-        <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress>
-        <!-- <input ref="progressref" id="seekslider" type="range" min="0" max="100" value="0" step="1" @mouseMove="onSeek"> -->
+        <!-- <progress ref="progressref" @click="progressClick" id="seekbar" value="0.1" max="1"></progress> -->
+        <input ref="progressref" class="seekslider" type="range" value="0" step="any" @change="onChange" @mouseup="onMouseUp" @mousedown="onMouseDown" >
+        <div class="timer">
+          <p class="time">{{ currentProgress }}</p>
+          <p class="time">{{ totalDuration }}</p>
+        </div>
       </div>
       <div class="profile-content-player">
-        <div class="audiovisualizer">
+        <!-- <div class="audiovisualizer">
           <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
-        </div>
-        <p class="timer">{{ currentProgress }} / {{ totalDuration }}</p>
+        </div> -->
         <div class="audio-player">
           <audio ref="playerref"
-            :ontimeupdate.prop="updateProgress" 
             id="player"
             :src="episodeToPlay"
+            @loadedmetadata="onLoadedMetaData"
+           :ontimeupdate.prop="onTimeUpdate"
            
-       
             >
           </audio>
           <div class="audio-controls">
@@ -33,8 +36,9 @@
             <span class="ui button" @click="skip"><i class="big forward icon" /></span>
             <span class="ui button" v-if="!speed" @click="normalSpeed(), speed = true">1x</span>
             <span class="ui button" v-else @click="playbackSpeed(), speed = false">1.5x</span>
-            <!-- <span class="ui button" ><i class="big volume off icon" /></span>
-            <input id="volumeslider" type="range" min="0" max="100" value="100" step="1"> -->
+            <span class="ui button" v-if="!silent" @click="mute"><i class="big volume up icon" /></span>
+            <span class="ui button" v-else @click="mute" ><i class="big volume off icon" /></span>
+            <input ref="volumeref" id="volumeslider" type="range" min="0" max="100" value="100" step="1" @mousemove="volume">
           </div>
         </div>
       </div> 
@@ -60,11 +64,11 @@ export default {
       boxposition: null,
       analyser1: null,
       analyser2: null,
-      defaultSeries: 'Business'
-      // seekslider: null,
-      // volumeslider: null,
+      defaultSeries: 'Business',
+      volumeslider: null,
       // seeking: false,
-      // seekTo: null
+      // seekTo: null,
+      silent: false
     };
   },
   watch: {
@@ -73,9 +77,7 @@ export default {
       this.$refs.playerref.currentTime = 0
       this.$refs.progressref.value = 0.1
       this.data1 = null;
-      this.playStatus = true;
-        
-      
+      this.playStatus = true;     
     }
   },
   created() {
@@ -120,71 +122,92 @@ export default {
     play() {
       this.$refs.playerref.play();
       this.playStatus = true;
-
-      // this.getSoundCloud();
     },
     pause() {
       this.$refs.playerref.pause();
       this.playStatus = false;
     },
     skip() {
-     let player = this.$refs.playerref
-      player.currentTime += 30.0;
+      let player = this.$refs.playerref
+      player.currentTime += 15.0;
     },
     rewind() {
-       let player = this.$refs.playerref
-      player.currentTime -= 30.0;
+      let player = this.$refs.playerref
+      player.currentTime -= 15.0;
     },
     playbackSpeed() {
-       let player = this.$refs.playerref
+      let player = this.$refs.playerref
       player.playbackRate = 1.5;
     },
     normalSpeed() {
-       let player = this.$refs.playerref
+      let player = this.$refs.playerref
       player.playbackRate = 1;
     },
-    // onSeek(event) {
-    //   const player = this.$refs.playerref;
-    //   // const seekslider = document.getElementById("seekslider");
-    //   const seekslider = this.$refs.progressref;
-
-    //   if (this.seeking) {
-    //     seekslider.value = event.clientX - seekslider.offsetLeft;
-    //     this.seekTo = player.duration * (seekslider.value / 100);
-    //     player.currentTime = this.seekTo;
-        
-    //   }
-    // },
-    progressClick(e) {
-      // let el = this.$refs.progressref;
-      var x = e.pageX  
-      // - this.$parent.$refs['myref'].getBoundingClientRect().width
-      // var startPos = this.$refs.progressref.position;
-      var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
-      var finalx = (xconvert).toFixed(1);
-      this.$refs.progressref.value = finalx
-     
-      var player = this.$refs.playerref;
-      var finalseconds = xconvert*player.duration;
-      player.currentTime = finalseconds;
-
+    volume() {
+      let player = this.$refs.playerref
+	    player.volume = volumeslider.value / 100;
     },
-    updateProgress() {
-      
-      // code for updating progress value bar
+    mute() {
+      let player = this.$refs.playerref
+      this.silent = !this.silent;
+
+      if (this.silent) {
+        player.muted = true;
+      } else {
+        player.muted = false;
+      }
+    },
+    // progressClick(e) {
+    //   // let el = this.$refs.progressref;
+    //   var x = e.pageX  
+    //   // - this.$parent.$refs['myref'].getBoundingClientRect().width
+    //   // var startPos = this.$refs.progressref.position;
+    //   var xconvert = x/this.$refs['myref2'].getBoundingClientRect().width;
+    //   var finalx = (xconvert).toFixed(1);
+    //   this.$refs.progressref.value = finalx
+     
+    //   var player = this.$refs.playerref;
+    //   var finalseconds = xconvert*player.duration;
+    //   player.currentTime = finalseconds;
+
+    // },
+    onLoadedMetaData() {
       const player = this.$refs.playerref;
       const progressbar = this.$refs.progressref;
-      progressbar.value = (player.currentTime / player.duration);
 
-      const timeConvert = (num) => { 
-      //   const hours = Math.floor(num / 60);  
-      //   const minutes = Math.floor(num % 60);
-      //   return `${hours}:${minutes}`;
-        const date = new Date(null);
-        date.setSeconds(num);
-        const result = date.toISOString().slice(-10, -5);
+      progressbar.max = player.duration;
+    },
+    onChange() {
+      const player = this.$refs.playerref;
+      const progressbar = this.$refs.progressref;
+      player.currentTime = progressbar.value;
+    },
+     onMouseDown() {
+      const player = this.$refs.playerref;
+      const progressbar = this.$refs.progressref;
+      player.pause();
 
-        return result;
+    },
+    onMouseUp() {
+      const player = this.$refs.playerref;
+      const progressbar = this.$refs.progressref;
+      player.play();
+      player.currentTime = progressbar.value;
+      
+
+    },
+    onTimeUpdate() {
+      const player = this.$refs.playerref;
+      const progressbar = this.$refs.progressref;
+
+      progressbar.value = player.currentTime;
+
+        const timeConvert = (num) => { 
+          const date = new Date(null);
+          date.setSeconds(num);
+          const result = date.toISOString().slice(-10, -5);
+
+          return result;
       }
 
       this.currentProgress = timeConvert(player.currentTime);
@@ -207,8 +230,6 @@ img {
 .profile-title-desc {
   width: 50%;
 }
-
-
 
 .audiovisualizer {
   /* height: 330px; */
@@ -251,7 +272,6 @@ img {
   padding: 50px;
   display: flex;
   justify-content: space-evenly;
-  /* align-items: center; */
 }
 
 .profile-title-desc {
@@ -265,7 +285,6 @@ img {
 
 .audio-player {
   width: inherit;
-  /* height: inherit; */
 }
 
 /* progress {
@@ -278,23 +297,25 @@ img {
   left: 0;
 } */
 
-progress {
+/* progress {
   -webkit-appearance: none;
   height: 3px;
   width: 40vw;
   position: relative;
   top: 0;
   left: 0;
-}
+} */
 
-progress[value]::-webkit-progress-bar {
+/* progress[value]::-webkit-progress-bar {
   background-color: transparent;
-}
+  border-radius: 5px;   
+  background: #d3d3d3;
+} */
 
-progress[value]::-webkit-progress-value {
+/* progress[value]::-webkit-progress-value {
   background-color: rgba(195, 223, 224, 0.3);
-  border-right: 5px solid #C3DFE0;
-}
+  border-right: 5px solid rgb(127, 183, 190);
+} */
 
 audio {
   position: relative;
@@ -377,6 +398,41 @@ button:hover::after {
 }
 
 .timer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time {
   color: black;
+}
+
+.seekslider {
+  -webkit-appearance: none;
+  width: 50vw;
+  height: 3px;
+  border-radius: 5px;   
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.seekslider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background:#C3DFE0;
+  cursor: pointer;
+}
+
+.seekslider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #C3DFE0;
+  cursor: pointer;
 }
 </style>
