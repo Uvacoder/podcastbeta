@@ -16,8 +16,6 @@
       </EpisodeListItem>
     </ul>
    <p>{{ offsetTop }}</p>
-    <p>{{ offsetHeightRef }}</p>
-      <p>{{ totalHeight }}</p>
   </div>
 </template>
 
@@ -54,7 +52,7 @@ methods: {
       this.totalHeight = this.$refs.getHeightUl.scrollHeight;
      
       
-      if ((this.offsetTop + this.offsetHeightRef) > (this.totalHeight) - 0) {
+      if ((this.offsetTop + this.offsetHeightRef) > (this.totalHeight) - 50) {
         console.log("bottom of page reached");
 
 
@@ -90,12 +88,17 @@ methods: {
 };
 </script>
 
-<style>
+<style scoped>
 ul {
   padding: 0;
   margin: 0;
   width: 35vw;
   overflow: auto;
   height: 98vh;
+}
+
+p {
+  color: white;
+  display: hidden;
 }
 </style>
