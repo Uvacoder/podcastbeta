@@ -8,36 +8,40 @@
           <p class="profile-desc">{{ episodeObject.description_original }}</p>
         </div>        
       </div>
-      <div>
-        <input ref="progressref" class="seekslider" type="range" value="0" step="any" @change="onChange" @mouseup="onMouseUp" @mousedown="onMouseDown" >
-        <div class="timer">
-          <p class="time">{{ currentProgress }}</p>
-          <p class="time">{{ totalDuration }}</p>
-        </div>
-      </div>
-      <div class="profile-content-player">
-        <div class="audio-player">
-          <audio ref="playerref"
-            id="player"
-            :src="episodeToPlay"
-            @loadedmetadata="onLoadedMetaData"
-           :ontimeupdate.prop="onTimeUpdate"
-           
-            >
-          </audio>
-          <div class="audio-controls">
-            <span class="ui button" @click="rewind"><i class="big backward icon" /></span>
-            <span class="ui button" v-if="!playStatus" @click="play"><i class="big play icon" /></span>
-            <span class="ui button" v-else @click="pause"><i class="big pause icon" /></span>
-            <span class="ui button" @click="skip"><i class="big forward icon" /></span>
-            <span class="ui button" v-if="!speed" @click="normalSpeed(), speed = true">1x</span>
-            <span class="ui button" v-else @click="playbackSpeed(), speed = false">1.5x</span>
-            <span class="ui button" v-if="!silent" @click="mute"><i class="big volume up icon" /></span>
-            <span class="ui button" v-else @click="mute" ><i class="big volume off icon" /></span>
-            <input ref="volumeref" id="volumeslider" type="range" min="0" max="100" value="100" step="1" @mousemove="volume">
+      <div class="fixed-player">
+        <div class="progress-time">
+          <input ref="progressref" class="seekslider" type="range" value="0" step="any" @change="onChange" @mouseup="onMouseUp" @mousedown="onMouseDown" >
+          <div class="timer">
+            <p class="time">{{ currentProgress }}</p>
+            <p class="time">{{ totalDuration }}</p>
           </div>
         </div>
-      </div> 
+        <div class="profile-content-player">
+          <!-- <div class="audiovisualizer">
+            <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
+          </div> -->
+          <div class="audio-player">
+            <audio ref="playerref"
+              id="player"
+              :src="episodeToPlay"
+              @loadedmetadata="onLoadedMetaData"
+            :ontimeupdate.prop="onTimeUpdate"            
+              >
+            </audio>
+            <div class="audio-controls">
+              <span class="ui button" @click="rewind"><i class="big backward icon" /></span>
+              <span class="ui button" v-if="!playStatus" @click="play"><i class="big play icon" /></span>
+              <span class="ui button" v-else @click="pause"><i class="big pause icon" /></span>
+              <span class="ui button" @click="skip"><i class="big forward icon" /></span>
+              <span class="ui button" v-if="!speed" @click="normalSpeed(), speed = true">1x</span>
+              <span class="ui button" v-else @click="playbackSpeed(), speed = false">1.5x</span>
+              <span class="ui button" v-if="!silent" @click="mute"><i class="big volume up icon" /></span>
+              <span class="ui button" v-else @click="mute" ><i class="big volume off icon" /></span>
+              <input ref="volumeref" id="volumeslider" type="range" min="0" max="100" value="100" step="1" @mousemove="volume">
+            </div>
+          </div>
+        </div> 
+      </div>
     </div> 
   </div>
 </template>
@@ -227,6 +231,7 @@ img {
 }
 
 .profile-content-info {
+  height: 100vh;
   padding: 50px;
   display: flex;
   justify-content: space-evenly;
@@ -236,9 +241,9 @@ img {
   margin: 0 20px;
 }
 
-.profile-content-player {
+/* .profile-content-player {
   margin: 0 50px 50px 50px;
-}
+} */
 
 
 .audio-player {
@@ -274,6 +279,20 @@ img {
   background-color: rgba(195, 223, 224, 0.3);
   border-right: 5px solid rgb(127, 183, 190);
 } */
+
+.fixed-player {
+    position: sticky;
+    width: inherit;
+    background-color: darksalmon;
+    left: 0;
+    bottom: 0;
+    /* z-index: 9; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20vh;
+    padding: 20px;
+}
 
 audio {
   position: relative;
