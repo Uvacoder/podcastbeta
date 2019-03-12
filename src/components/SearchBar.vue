@@ -22,17 +22,17 @@ export default {
 input {
   font-family: inherit;
   font-size: 1.2em;
-  width: 32vw;
+  width: 28vw;
   border: none;
   /* border-bottom: 2px solid #DDD; */
-  border-bottom: 2px solid #C3DFE0;
+  border-bottom: 2px solid #eee;
   height: 35px;
   transition: 0.3s ease-out;
 }
 
 input:focus {
   outline: none;
-  /* border-bottom-color: #C3DFE0; */
+  border-bottom-color: #63ab97;
 }
 
 /* div{

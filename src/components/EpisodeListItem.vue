@@ -17,7 +17,7 @@ export default {
 <style scoped>
 .card {
   display: flex;
-  border: 1px solid #eee;
+  border: 1px solid #DDD;
   /* border-radius: 5px; */
 }
 
@@ -38,15 +38,28 @@ export default {
   color: black; 
 }
 
+
+
 /* li:hover {
   background-color: #EFD5C3;
 } */
 
 .link-content {
   margin: 0 20px 14px 20px;
+  /* height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px; */
 }
 
 img {
-  /* border-radius: 5px 0 0 5px; */
+  /* height: 150px; */
+  /* border-radius: 5px; */
+  /* border: 1px solid #eee; */
+}
+
+.router-link-active li {
+  background-color: #DDD;
 }
 </style>

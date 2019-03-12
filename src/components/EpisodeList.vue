@@ -8,6 +8,7 @@
         v-for="episode in episodes"
         :episode="episode"
         :key="episode.id"
+        active-class="active"
       >
       </EpisodeListItem>
     </ul>
@@ -72,7 +73,7 @@ methods: {
 ul {
   padding: 0;
   margin: 0;
-  width: 35vw;
+  /* width: 30vw; */
   overflow: auto;
   height: 98vh;
 }
