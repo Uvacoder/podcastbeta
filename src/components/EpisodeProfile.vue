@@ -33,14 +33,14 @@
               >
             </audio>
             <div class="audio-controls">
-              <span class="ui button" @click="rewind"><i class="big backward icon" /></span>
-              <span class="ui button" v-if="!playStatus" @click="play"><i class="big play icon" /></span>
-              <span class="ui button" v-else @click="pause"><i class="big pause icon" /></span>
-              <span class="ui button" @click="skip"><i class="big forward icon" /></span>
+              <span class="ui button" @click="rewind"><i class="large backward icon" /></span>
+              <span class="ui button" v-if="!playStatus" @click="play"><i class="huge play icon" /></span>
+              <span class="ui button" v-else @click="pause"><i class="huge pause icon" /></span>
+              <span class="ui button" @click="skip"><i class="large forward icon" /></span>
               <span class="ui button" v-if="!speed" @click="normalSpeed(), speed = true">1x</span>
               <span class="ui button" v-else @click="playbackSpeed(), speed = false">1.5x</span>
-              <span class="ui button" v-if="!silent" @click="mute"><i class="big volume up icon" /></span>
-              <span class="ui button" v-else @click="mute" ><i class="big volume off icon" /></span>
+              <span class="ui button" v-if="!silent" @click="mute"><i class="large volume up icon" /></span>
+              <span class="ui button" v-else @click="mute" ><i class="large volume off icon" /></span>
               <input ref="volumeref" id="volumeslider" type="range" min="0" max="100" value="100" step="1" @mousemove="volume">
             </div>
           </div>
@@ -228,14 +228,16 @@ img {
 
 .profile-container {
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .profile-content-info {
-  height: 100vh;
+  /* height: 100vh; */
+  width: 70vw;
   padding: 50px;
   display: flex;
   justify-content: space-evenly;
@@ -287,7 +289,7 @@ img {
 .fixed-player {
     position: sticky;
     width: inherit;
-    background-color: darksalmon;
+    /* background-color: darksalmon; */
     left: 0;
     bottom: 0;
     /* z-index: 9; */
@@ -323,15 +325,20 @@ button:focus {
   /* border-bottom-color: #C3DFE0; */
 }
 
+.icon {
+  margin: 0 !important;
+}
+
 .ui.button {
   background: none;
   color: black;
+  margin: 0;
 }
 
-.ui.button:hover {
-  color: #C3DFE0;
+/* .ui.button:hover {
+  color: #63ab97;
   background: none;
-}
+} */
 
 p {
 white-space: pre-wrap;
@@ -341,9 +348,9 @@ color: rgba(255,255,255,0.75);
 /* font-family: 'ModernEra', 'Roboto', 'Noto', sans-serif; */
 }
 
-button:hover {
-  background-color: #C3DFE0;
-}
+/* button:hover {
+  background-color: #63ab97;
+} */
 
 /* button::after {
   position: absolute;
@@ -396,7 +403,7 @@ button:hover::after {
   width: 15px;
   height: 15px;
   border-radius: 50%; 
-  background:#C3DFE0;
+  background:#63ab97;
   cursor: pointer;
 }
 
@@ -404,7 +411,7 @@ button:hover::after {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #C3DFE0;
+  background: #63ab97;
   cursor: pointer;
 }
 

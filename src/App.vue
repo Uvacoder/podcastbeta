@@ -8,14 +8,14 @@
       <div class="app-header">
         <h1 class="logo">LOGO</h1>
         <div class="category-link">
-          <router-link :to="{ path: '/Topic/Art/' }" class="category-path">Art</router-link>
-          <router-link :to="{ path: '/Topic/Business/' }" class="category-path">Business</router-link>
-          <router-link :to="{ path: '/Topic/Crime/' }" class="category-path">Crime</router-link>
-          <router-link :to="{ path: '/Topic/Food/' }" class="category-path">Food</router-link>
-          <router-link :to="{ path: '/Topic/Movies/' }" class="category-path">Movies</router-link>
-          <router-link :to="{ path: '/Topic/Music/' }" class="category-path">Music</router-link>
-          <router-link :to="{ path: '/Topic/Startup/' }" class="category-path">Startup</router-link>
-          <router-link :to="{ path: '/Topic/Technology/' }" class="category-path">Technology</router-link>
+          <router-link :to="{ path: '/Topic/Art/' }" class="category-path" >Art</router-link>
+          <router-link :to="{ path: '/Topic/Business/' }" class="category-path" >Business</router-link>
+          <router-link :to="{ path: '/Topic/Crime/' }" class="category-path" >Crime</router-link>
+          <router-link :to="{ path: '/Topic/Food/' }" class="category-path" >Food</router-link>
+          <router-link :to="{ path: '/Topic/Movies/' }" class="category-path" >Movies</router-link>
+          <router-link :to="{ path: '/Topic/Music/' }" class="category-path" >Music</router-link>
+          <router-link :to="{ path: '/Topic/Startup/' }" class="category-path" >Startup</router-link>
+          <router-link :to="{ path: '/Topic/Technology/' }" class="category-path" >Technology</router-link>
         </div>
         <SearchBar @inputChange="onInputChange"/>
       </div>
@@ -132,7 +132,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 15px 20px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -145,7 +145,8 @@ body {
   /* padding-top: 40px;
   padding-left: 5px;
   height: 100px; */
-  color: #C3DFE0;
+  color: #63ab97;
+  margin: 0;
 }
 
 .category-link {
@@ -160,4 +161,13 @@ body {
   text-transform: uppercase;
 }
 
+.category-path:hover {
+  color: #63ab97;
+}
+
+.router-link-active {
+  color: #63ab97;
+  font-weight: bold;
+  font-size: 1.3em;
+}
 </style>
