@@ -8,14 +8,14 @@
       <div class="app-header">
         <h1 class="logo">LOGO</h1>
         <div class="category-link">
-          <router-link :to="{ path: '/Topic/Art/' }" class="category-path" >Art</router-link>
-          <router-link :to="{ path: '/Topic/Business/' }" class="category-path" >Business</router-link>
-          <router-link :to="{ path: '/Topic/Crime/' }" class="category-path" >Crime</router-link>
-          <router-link :to="{ path: '/Topic/Food/' }" class="category-path" >Food</router-link>
-          <router-link :to="{ path: '/Topic/Movies/' }" class="category-path" >Movies</router-link>
-          <router-link :to="{ path: '/Topic/Music/' }" class="category-path" >Music</router-link>
-          <router-link :to="{ path: '/Topic/Startup/' }" class="category-path" >Startup</router-link>
-          <router-link :to="{ path: '/Topic/Technology/' }" class="category-path" >Technology</router-link>
+          <router-link :to="{ path: '/topic/art/' }" class="category-path" >Art</router-link>
+          <router-link :to="{ path: '/topic/business/' }" class="category-path" >Business</router-link>
+          <router-link :to="{ path: '/topic/crime/' }" class="category-path" >Crime</router-link>
+          <router-link :to="{ path: '/topic/food/' }" class="category-path" >Food</router-link>
+          <router-link :to="{ path: '/topic/movies/' }" class="category-path" >Movies</router-link>
+          <router-link :to="{ path: '/topic/music/' }" class="category-path" >Music</router-link>
+          <router-link :to="{ path: '/topic/startup/' }" class="category-path" >Startup</router-link>
+          <router-link :to="{ path: '/topic/technology/' }" class="category-path" >Technology</router-link>
         </div>
         <SearchBar @inputChange="onInputChange"/>
       </div>
@@ -168,6 +168,5 @@ body {
 .router-link-active {
   color: #63ab97;
   font-weight: bold;
-  font-size: 1.3em;
 }
 </style>
