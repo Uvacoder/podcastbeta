@@ -7,6 +7,7 @@
     <div ref="myref">
       <div class="app-header">
         <h1 class="logo">LOGO</h1>
+        <!-- <span class="ui button"><i class="big podcast icon"></i></span> -->
         <div class="category-link">
           <router-link :to="{ path: '/topic/art/' }" class="category-path" >Art</router-link>
           <router-link :to="{ path: '/topic/business/' }" class="category-path" >Business</router-link>

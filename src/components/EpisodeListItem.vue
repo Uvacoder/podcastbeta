@@ -61,5 +61,6 @@ img {
 
 .router-link-active li {
   background-color: #DDD;
+  color: #63ab97;
 }
 </style>
