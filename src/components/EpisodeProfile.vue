@@ -1,7 +1,12 @@
 <template>
   <div class="profile-content" ref="myref2">
     <div class="profile-container">
+       <div class="podcast-series">
+         <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + episodeObject.podcast_id }" class="category-path">Click to see all episodes in the series</router-link>
+         <div>Podcast Series Link</div>
+         </div>
       <div class="profile-content-info">
+       
         <img v-if="episodeObject" :src="episodeObject.image" />
         <div class="profile-title-desc">
           <h1>{{ episodeObject.title_original }}</h1>
@@ -402,5 +407,12 @@ button:hover::after {
   border-radius: 50%;
   background: #C3DFE0;
   cursor: pointer;
+}
+
+.podcast-series {
+  /* display: flex; */
+  /* justify-content: right; */
+  text-align: right;
+  width: inherit;
 }
 </style>
