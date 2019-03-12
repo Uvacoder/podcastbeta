@@ -22,11 +22,10 @@
           </div>
         </div>
         <div class="profile-content-player">
-          <!-- <div class="audiovisualizer">
-            <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
-          </div> -->
+       
           <div class="audio-player">
             <audio ref="playerref"
+              v-if="episodeToPlay"
               id="player"
               :src="episodeToPlay"
               @loadedmetadata="onLoadedMetaData"
@@ -137,6 +136,7 @@ export default {
     },
     volume() {
       let player = this.$refs.playerref
+      let volumeslider = this.$refs.volumeref
 	    player.volume = volumeslider.value / 100;
     },
     mute() {
