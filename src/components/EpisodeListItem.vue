@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ path: episode.id }" class="link-decoration">
+  <router-link :to="{ path: '/topic/' +this.$route.params.series+ '/' + episode.id }" class="link-decoration">
     <li class="card link-decoration link-content">
       <img :src="episode.image" />
       <p class="card-body">{{ episode.title_original }}</p>

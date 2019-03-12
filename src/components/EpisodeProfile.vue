@@ -1,7 +1,12 @@
 <template>
   <div class="profile-content" ref="myref2">
     <div class="profile-container">
+       <div class="podcast-series">
+         <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + episodeObject.podcast_id }" class="category-path">Click to see all episodes in the series</router-link>
+         <div>Podcast Series Link</div>
+         </div>
       <div class="profile-content-info">
+       
         <img v-if="episodeObject" :src="episodeObject.image" />
         <div class="profile-title-desc">
           <h1>{{ episodeObject.title_original }}</h1>
@@ -17,11 +22,10 @@
           </div>
         </div>
         <div class="profile-content-player">
-          <!-- <div class="audiovisualizer">
-            <div v-for="(item, index) in data1" class="changeheight" :style="{height: data1[index]+'px'}" :key="index"></div>
-          </div> -->
+       
           <div class="audio-player">
             <audio ref="playerref"
+              v-if="episodeToPlay"
               id="player"
               :src="episodeToPlay"
               @loadedmetadata="onLoadedMetaData"
@@ -72,7 +76,7 @@ export default {
     };
   },
   watch: {
-    $route(to, from) {
+    $route() {
       this.getSoundCloud();
       this.$refs.playerref.currentTime = 0
       this.$refs.progressref.value = 0.1
@@ -132,6 +136,7 @@ export default {
     },
     volume() {
       let player = this.$refs.playerref
+      let volumeslider = this.$refs.volumeref
 	    player.volume = volumeslider.value / 100;
     },
     mute() {
@@ -157,7 +162,6 @@ export default {
     },
      onMouseDown() {
       const player = this.$refs.playerref;
-      const progressbar = this.$refs.progressref;
       player.pause();
 
     },
@@ -411,4 +415,10 @@ button:hover::after {
   cursor: pointer;
 }
 
+.podcast-series {
+  /* display: flex; */
+  /* justify-content: right; */
+  text-align: right;
+  width: inherit;
+}
 </style>
