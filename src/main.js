@@ -4,10 +4,6 @@ import Router from "vue-router";
 import EpisodeProfile from "./components/EpisodeProfile.vue";
 import EpisodeList from "./components/EpisodeList.vue";
 import EpisodeProfileDefaultPlayer from './components/EpisodeProfileDefaultPlayer';
-// import Vuetify from 'vuetify'
-// import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
-
-// Vue.use(Vuetify);
 
 import VueLodash from "lodash";
 
@@ -31,6 +27,14 @@ export const router = new Router({
     {
       path: "/topic/:series/",
       name: "episodelist",
+      components: {
+        a: EpisodeProfile,
+        b: EpisodeList
+      }
+    },
+    {
+      path: "/topic/:series/:id/:podcastseries/",
+      name: "episodeseries",
       components: {
         a: EpisodeProfile,
         b: EpisodeList
