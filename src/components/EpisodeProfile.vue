@@ -76,7 +76,7 @@ export default {
     };
   },
   watch: {
-    $route(to, from) {
+    $route() {
       this.getSoundCloud();
       this.$refs.playerref.currentTime = 0
       this.$refs.progressref.value = 0.1
@@ -162,7 +162,6 @@ export default {
     },
      onMouseDown() {
       const player = this.$refs.playerref;
-      const progressbar = this.$refs.progressref;
       player.pause();
 
     },

@@ -68,7 +68,7 @@ export default {
     this.getSoundCloud();
   },
    watch: {
-    $route(to, from) {
+    $route() {
       this.getSoundCloud();
     }
   },
