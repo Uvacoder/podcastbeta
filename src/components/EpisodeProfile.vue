@@ -1,10 +1,12 @@
 <template>
   <div class="profile-content" ref="myref2">
     <div class="profile-container">
-       <div class="podcast-series">
-         <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + episodeObject.podcast_id }" class="category-path">Click to see all episodes in the series</router-link>
-         <div>Podcast Series Link</div>
+       <div class="podcast-series-container">
+         <div class="podcast-series">
+          <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + episodeObject.podcast_id }" class="category-path">Click to see more episodes in the series</router-link>
+          <div>Podcast Series Link</div>
          </div>
+        </div>
       <div class="profile-content-info">
        
         <img v-if="episodeObject" :src="episodeObject.image" />
@@ -415,10 +417,17 @@ button:hover::after {
   cursor: pointer;
 }
 
-.podcast-series {
-  /* display: flex; */
-  /* justify-content: right; */
-  text-align: right;
+.podcast-series-container {
   width: inherit;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.podcast-series{
+  text-align: right;
+  padding: 10px;
+  background-color: #DDD;
+  border-radius: 5px;
 }
 </style>
