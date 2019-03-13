@@ -25,7 +25,7 @@
           <router-view name="a" />
         </div>
         <div ref="myref">  
-          <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes"/>
+          <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes" :inputChange="inputChange"/>
         </div>
       </div>
     </div>
