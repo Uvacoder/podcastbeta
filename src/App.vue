@@ -156,6 +156,16 @@ body {
 
 }
 
+.category-path {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+}
+
+.category-path:hover {
+  color: #63ab97;
+}
+
 .router-link-active {
   color: #63ab97;
   font-weight: bold;
