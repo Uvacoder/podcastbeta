@@ -18,7 +18,6 @@ export default {
 .card {
   display: flex;
   border: 1px solid #DDD;
-  /* border-radius: 5px; */
 }
 
 .card-body {
@@ -30,7 +29,6 @@ export default {
   font-size: 0.9em;
   display: flex;
   align-items: center;
-  /* text-align: center; */
 }
 
 .link-decoration {
@@ -38,25 +36,8 @@ export default {
   color: black; 
 }
 
-
-
-/* li:hover {
-  background-color: #EFD5C3;
-} */
-
 .link-content {
   margin: 0 20px 14px 20px;
-  /* height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 20px; */
-}
-
-img {
-  /* height: 150px; */
-  /* border-radius: 5px; */
-  /* border: 1px solid #eee; */
 }
 
 .router-link-active li {
