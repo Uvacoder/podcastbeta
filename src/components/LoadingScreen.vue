@@ -85,7 +85,7 @@ data() {
   mounted() {
     setTimeout(() => {
         this.isSvgLoaded = false 
-    }, 750) 
+    }, 1000) 
 }
 };
 
