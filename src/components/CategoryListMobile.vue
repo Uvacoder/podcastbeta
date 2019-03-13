@@ -6,14 +6,7 @@
       <i class="dropdown icon"></i>
       <!-- <div class="default text">Category</div> -->
       <div class="menu">
-        <router-link :to="{ path: '/topic/art/' }" class="category-path item" data-value="art">Art</router-link>
-        <router-link :to="{ path: '/topic/business/' }" class="category-path item" data-value="business">Business</router-link>
-        <router-link :to="{ path: '/topic/crime/' }" class="category-path item" data-value="crime">Crime</router-link>
-        <router-link :to="{ path: '/topic/food/' }" class="category-path item" data-value="food">Food</router-link>
-        <router-link :to="{ path: '/topic/movies/' }" class="category-path item" data-value="movies">Movies</router-link>
-        <router-link :to="{ path: '/topic/music/' }" class="category-path item" data-value="music">Music</router-link>
-        <router-link :to="{ path: '/topic/startup/' }" class="category-path item" data-value="startup">Startup</router-link>
-        <router-link :to="{ path: '/topic/technology/' }" class="category-path item" data-value="technology">Technology</router-link>
+        <router-link v-for="(category, index) in categories" :to="{ path: '/topic/' + category + '/' }" class="category-path" :key="index">{{category}}</router-link>
       </div>
     </div>
   </div>
@@ -22,9 +15,11 @@
 <script>
 export default {
   name: "CategoryListMobile",
-  // mounted() {
-  //   $(this.$refs.app_type).dropdown();
-  // }
+  data() {
+    return {
+      categories: ["art", "business", "crime", "food", "movies", "music", "startup", "technology"]
+    };
+  }
 }
 </script>
 

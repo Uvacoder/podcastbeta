@@ -1,19 +1,19 @@
 <template>
   <div class="category-link">
-    <router-link :to="{ path: '/topic/art/' }" class="category-path">Art</router-link>
-    <router-link :to="{ path: '/topic/business/' }" class="category-path">Business</router-link>
-    <router-link :to="{ path: '/topic/crime/' }" class="category-path">Crime</router-link>
-    <router-link :to="{ path: '/topic/food/' }" class="category-path">Food</router-link>
-    <router-link :to="{ path: '/topic/movies/' }" class="category-path">Movies</router-link>
-    <router-link :to="{ path: '/topic/music/' }" class="category-path">Music</router-link>
-    <router-link :to="{ path: '/topic/startup/' }" class="category-path">Startup</router-link>
-    <router-link :to="{ path: '/topic/technology/' }" class="category-path">Technology</router-link>
+
+    <router-link v-for="(category, index) in categories" :to="{ path: '/topic/' + category + '/' }" class="category-path" :key="index">{{category}}</router-link>
+
   </div>
 </template>
 
 <script>
 export default {
-  name: "CategoryListMobile"
+  name: "CategoryListMobile",
+  data() {
+    return {
+      categories: ["art", "business", "crime", "food", "movies", "music", "startup", "technology"]
+    };
+  }
 }
 </script>
 
