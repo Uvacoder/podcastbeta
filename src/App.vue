@@ -1,7 +1,7 @@
 <template>
 <div>
   <LoadingScreen :isLoading="isLoading" />
-    <div v-if="!isLoading">
+    <div v-show="!isLoading">
   <div class="app-content">
     
     <div ref="myref">
@@ -64,7 +64,7 @@ export default {
   mounted() {
      setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
+    }, 1000);
 
     this.getSoundCloud();
   },
