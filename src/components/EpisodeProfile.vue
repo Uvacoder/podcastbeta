@@ -83,7 +83,7 @@ export default {
       this.$refs.playerref.currentTime = 0
       this.$refs.progressref.value = 0.1
       this.data1 = null;
-      this.playStatus = true;     
+      this.playStatus = false;     
     }
   },
   created() {
