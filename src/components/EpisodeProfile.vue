@@ -3,7 +3,7 @@
     <div class="profile-container">
        <div class="podcast-series-container">
          <div class="podcast-series">
-          <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + (episodeObject.podcast_id || episodeObject.podcast.id) }" class="category-path">more episodes in the series</router-link>
+          <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + (episodeObject.podcast_id || episodeObject.podcast.id) }" class="category-path">More episodes in the series</router-link>
           <div>Podcast Series Link</div>
          </div>
         </div>

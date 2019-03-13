@@ -1,23 +1,13 @@
 <template>
 <div>
   <LoadingScreen :isLoading="isLoading" />
-    <div v-show="!isLoading">
+  <div v-show="!isLoading">
   <div class="app-content">
-    
     <div ref="myref">
       <div class="app-header">
-        <h1 class="logo">LOGO</h1>
-        <!-- <span class="ui button"><i class="big podcast icon"></i></span> -->
-        <div class="category-link">
-          <router-link :to="{ path: '/topic/art/' }" class="category-path" >Art</router-link>
-          <router-link :to="{ path: '/topic/business/' }" class="category-path" >Business</router-link>
-          <router-link :to="{ path: '/topic/crime/' }" class="category-path" >Crime</router-link>
-          <router-link :to="{ path: '/topic/food/' }" class="category-path" >Food</router-link>
-          <router-link :to="{ path: '/topic/movies/' }" class="category-path" >Movies</router-link>
-          <router-link :to="{ path: '/topic/music/' }" class="category-path" >Music</router-link>
-          <router-link :to="{ path: '/topic/startup/' }" class="category-path" >Startup</router-link>
-          <router-link :to="{ path: '/topic/technology/' }" class="category-path" >Technology</router-link>
-        </div>
+        <img src="/podplay1.png" alt="logo" class="logo"/>
+        <CategoryList v-if="!isMobile" />
+        <CategoryListMobile v-else />
         <SearchBar @inputChange="onInputChange"/>
       </div>
       <div class="app-body">
@@ -41,6 +31,8 @@ import EpisodeProfile from "./components/EpisodeProfile";
 import SearchBar from "./components/SearchBar";
 import EpisodeProfileDefaultPlayer from "./components/EpisodeProfileDefaultPlayer";
 import LoadingScreen from './components/LoadingScreen';
+import CategoryList from "./components/CategoryList";
+import CategoryListMobile from "./components/CategoryListMobile";
 
 export default {
   name: "App",
@@ -49,7 +41,9 @@ export default {
     EpisodeList,
     EpisodeProfile,
     SearchBar,
-    EpisodeProfileDefaultPlayer
+    EpisodeProfileDefaultPlayer,
+    CategoryList,
+    CategoryListMobile
   },
   data() {
     return {
@@ -58,7 +52,8 @@ export default {
       currentPodcastUrl: null,
       inputChange: "",
       defaultSeries: "Business",
-      isLoading: true
+      isLoading: true,
+      screenWidth: screen.width
     };
   },
   mounted() {
@@ -67,6 +62,12 @@ export default {
     }, 1000);
 
     this.getSoundCloud();
+
+    window.addEventListener('resize', () => {
+      this.screenWidth = screen.width
+      // console.log(this.screenWidth)
+      // console.log(this.isMobile)
+    })
   },
    watch: {
     $route() {
@@ -81,6 +82,13 @@ export default {
       return this.episodes.filter((episode) => {
         return episode.title_original.toLowerCase().match(this.inputChange.toLowerCase());
       });
+    },
+    isMobile() {
+      if( this.screenWidth <= 768 ) {
+        return true;
+      } else {
+        return false;
+      }     
     }
   },
   methods: {
@@ -146,31 +154,18 @@ body {
 }
 
 .logo {
-  /* padding-top: 40px;
-  padding-left: 5px;
-  height: 100px; */
-  color: #63ab97;
-  margin: 0;
-}
+  width: 100px;
 
-.category-link {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.category-path {
-  text-decoration: none;
-  color: black;
-  text-transform: uppercase;
-}
-
-.category-path:hover {
-  color: #63ab97;
 }
 
 .router-link-active {
   color: #63ab97;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .app-body {
+    flex-direction: column-reverse;
+  }
 }
 </style>
