@@ -1,12 +1,23 @@
 <template>
   <div>    
-    <input placeholder="Search" @input="onInputChange"/>
+    <input placeholder="Search" @input="onInputChange" ref="emptyinput"/>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SearchBar',
+  props: ["value"],
+  data() {
+    return {
+      value: ""
+    }
+  },
+  watch: {
+    $route() {
+      this.$refs.emptyinput.value = null;
+    }
+  },
   methods: {
     onInputChange: function(event) {
       this.$emit('inputChange', event.target.value);
