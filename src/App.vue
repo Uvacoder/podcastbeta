@@ -1,8 +1,8 @@
 <template>
 <div>
   <LoadingScreen :isLoading="isLoading" />
-    <div v-if="!isLoading">
-  <div class="app-content">    
+  <div v-show="!isLoading">
+  <div class="app-content">
     <div ref="myref">
       <div class="app-header">
         <img src="/podplay1.png" alt="logo" class="logo"/>
@@ -15,7 +15,7 @@
           <router-view name="a" />
         </div>
         <div ref="myref">  
-          <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes"/>
+          <router-view name="b" v-if="filteredepisodes" :episodes="filteredepisodes" :inputChange="inputChange"/>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@ export default {
   mounted() {
      setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
+    }, 1000);
 
     this.getSoundCloud();
 
@@ -72,7 +72,10 @@ export default {
    watch: {
     $route() {
       this.getSoundCloud();
-    }
+    },
+    inputChange: function(nv, ov) {
+      this.getSoundCloud()
+    },
   },
   computed: {
     filteredepisodes: function() {
@@ -106,7 +109,7 @@ export default {
      } else if (this.$route.params.podcastseries) {
           axios
         .get(
-          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&ocid=${this.$route.params.podcastseries}&safe_mode=1&q=${this.$route.params.series}`, {
+          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&ocid=${this.$route.params.podcastseries}&safe_mode=1&q=${this.inputChange || this.$route.params.series}`, {
             headers: {
               'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
             }

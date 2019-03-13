@@ -3,7 +3,7 @@
     <div class="profile-container">
        <div class="podcast-series-container">
          <div class="podcast-series">
-          <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + episodeObject.podcast_id }" class="category-path">More episodes in the series</router-link>
+          <router-link :to="{ path: '/topic/' + this.$route.params.series+ '/' + episodeObject.id+ '/' + (episodeObject.podcast_id || episodeObject.podcast.id) }" class="category-path">More episodes in the series</router-link>
           <div>Podcast Series Link</div>
          </div>
         </div>
@@ -11,8 +11,8 @@
        
         <img v-if="episodeObject" :src="episodeObject.image" />
         <div class="profile-title-desc">
-          <h1>{{ episodeObject.title_original }}</h1>
-          <p class="profile-desc">{{ episodeObject.description_original }}</p>
+          <h1>{{ episodeObject.title_original || episodeObject.title }}</h1>
+          <p class="profile-desc">{{ episodeObject.description_original || episodeObject.description }}</p>
         </div>        
       </div>
       <div class="fixed-player">
@@ -100,7 +100,9 @@ export default {
     async getSoundCloud() {
       // this.data1 = null;
       const CLIENT_ID_LISTEN = process.env.VUE_APP_CLIENT_ID_LISTEN;
-      const response = await axios.get(
+      
+      if (!this.$route.params.id) {
+        const response = await axios.get(
         `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&safe_mode=1&q=${this.$route.params.series || this.defaultSeries}`, {
             headers: {
               'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
@@ -111,6 +113,26 @@ export default {
       );
       this.episodeObject = (result || response.data.results[0]);
       this.episodeToPlay = (result.audio || response.data.results[0].audio);
+
+      } else if (this.$route.params.id) {
+
+         const response = await axios.get(
+        `https://listennotes.p.rapidapi.com/api/v1/episodes/${this.$route.params.id}`, {
+            headers: {
+              'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
+            }
+          });
+      const result = response.data
+      console.log(this.$route.params.id)
+      console.log(result);
+      this.episodeObject = (result || this.episodes[0]);
+      this.episodeToPlay = (result.audio || this.episodes[0].audio);
+      }
+
+      
+
+
+     
     },
     play() {
       this.$refs.playerref.play();
