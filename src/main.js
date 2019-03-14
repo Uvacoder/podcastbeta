@@ -9,6 +9,13 @@ import VueLodash from "lodash";
 
 const options = { name: 'lodash' }; // customize the way you want to call it
 
+Vue.filter('striphtml', function (value) {
+  var div = document.createElement("div");
+  div.innerHTML = value;
+  var text = div.textContent || div.innerText || "";
+  return text;
+});
+
 Vue.use(VueLodash, options); // options is optional
 
 Vue.use(Router);

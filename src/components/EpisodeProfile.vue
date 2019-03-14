@@ -12,7 +12,7 @@
         <img v-if="episodeObject" :src="episodeObject.image" />
         <div class="profile-title-desc">
           <h1>{{ episodeObject.title_original || episodeObject.title }}</h1>
-          <p class="profile-desc">{{ episodeObject.description_original || episodeObject.description }}</p>
+          <p class="profile-desc">{{ (episodeObject.description_original || episodeObject.description) | striphtml }}</p>
         </div>        
       </div>
       <div class="fixed-player">
@@ -398,6 +398,7 @@ button:hover::after {
     height: 350px; */
     font-size: 0.8em;
     color: black;
+    white-space: pre-wrap;
 }
 
 .timer {
