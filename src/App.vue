@@ -74,7 +74,10 @@ export default {
     $route() {
       this.getSoundCloud();
       this.inputChange = "";
-    }
+    },
+     inputChange: function() {
+      this.getSoundCloud();
+    },
   },
   computed: {
     filteredepisodes: function() {
@@ -108,7 +111,7 @@ export default {
      } else if (this.$route.params.podcastseries) {
           axios
         .get(
-          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=0&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&ocid=${this.$route.params.podcastseries}&safe_mode=1&q=${this.$route.params.series}`, {
+          `https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=episode&offset=${this.pageTotal}&len_min=2&len_max=10&genre_ids=68%2C82&published_before=1490190241000&published_after=1390190241000&only_in=title&language=English&ocid=${this.$route.params.podcastseries}&safe_mode=1&q=${this.inputChange || this.$route.params.series}`, {
             headers: {
               'X-RapidAPI-Key': `${CLIENT_ID_LISTEN}`
             }

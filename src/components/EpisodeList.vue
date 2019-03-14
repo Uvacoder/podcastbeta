@@ -36,7 +36,7 @@ export default {
     pageTotal: 10
   }),
    watch: {
-    inputChange: function(nv, ov) {
+    inputChange: function() {
       this.onScroll()
     },
   },
