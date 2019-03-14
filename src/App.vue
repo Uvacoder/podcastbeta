@@ -73,6 +73,7 @@ export default {
    watch: {
     $route() {
       this.getSoundCloud();
+      this.inputChange = "";
     }
   },
   computed: {

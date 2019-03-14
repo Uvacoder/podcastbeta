@@ -7,12 +7,7 @@
 <script>
 export default {
   name: 'SearchBar',
-  props: ["value"],
-  data() {
-    return {
-      value: ""
-    }
-  },
+
   watch: {
     $route() {
       this.$refs.emptyinput.value = null;
