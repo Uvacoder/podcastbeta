@@ -66,8 +66,6 @@ export default {
 
     window.addEventListener('resize', () => {
       this.screenWidth = screen.width
-      console.log(this.screenWidth)
-      console.log(this.isMobile)
     })
   },
    watch: {
